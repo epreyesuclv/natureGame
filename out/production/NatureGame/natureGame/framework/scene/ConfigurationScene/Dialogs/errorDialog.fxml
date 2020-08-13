@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="227.0" prefWidth="421.0" xmlns="http://javafx.com/javafx/8.0.241" xmlns:fx="http://javafx.com/fxml/1" fx:controller="natureGame.framework.scene.ConfigurationScene.Dialogs.ErrorDialog">
+   <children>
+      <ImageView fx:id="image" fitHeight="91.0" fitWidth="90.0" layoutX="30.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="natureGame/Assets/Images/Otros/cancel.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="text" layoutX="134.0" layoutY="35.0" prefHeight="135.0" prefWidth="251.0" text="Label" textAlignment="JUSTIFY" textOverrun="CLIP" wrapText="true" />
+      <Button fx:id="btnAceptar" layoutX="176.0" layoutY="177.0" mnemonicParsing="false" onAction="#exit" prefHeight="30.0" prefWidth="70.0" text="Aceptar">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
