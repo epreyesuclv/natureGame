@@ -14,12 +14,12 @@ public class LoadingScreen extends Screen {
     @Override
     public void update(float deltaTime) {
         Graphics g = game.getGraphics();
-        Assets.atras = g.newPixmap("natureGame/Assets/Images/Otros/atras.png", 90,90);
-        Assets.X = g.newPixmap("natureGame/Assets/Images/Otros/x.png", 90,90);
-        Assets.gamepad = g.newPixmap("natureGame/Assets/Images/Otros/gamepad-console.jpg", 90,90);
-        Assets.configuration = g.newPixmap("natureGame/Assets/Images/Otros/configuration.png", 90,90);
+        Assets.atras = g.newPixmap("natureGame/Assets/Images/Otros/atras.png", 90, 90);
+        Assets.X = g.newPixmap("natureGame/Assets/Images/Otros/x.png", 90, 90);
+        Assets.gamepad = g.newPixmap("natureGame/Assets/Images/Otros/gamepad-console.jpg", 90, 90);
+        Assets.configuration = g.newPixmap("natureGame/Assets/Images/Otros/configuration.png", 90, 90);
         Assets.terreno = g.newPixmap("natureGame/Assets/Images/Resources/Terreno/terreno.png", 0);
-
+        Assets.pieChart = g.newPixmap("natureGame/Assets/Images/Otros/pie-chart.jpg", 0);
         Assets.piedra = g.newPixmap("natureGame/Assets/Images/Resources/Piedra/piedra1.png", 0);
         Assets.planta = g.newPixmap("natureGame/Assets/Images/Resources/Planta/planta2.png", 0);
         Assets.huesos = g.newPixmap("natureGame/Assets/Images/Resources/Huesos/huesos.png", 0);

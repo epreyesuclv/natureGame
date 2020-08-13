@@ -120,11 +120,7 @@ public class MyGame extends Application implements Game {
         launch(args);
     }
 
-    public List<Animal> getList() {
-        return Util.initList;
-    }
-
-    public void blockStage() {
+       public void blockStage() {
         primaryStage.getScene().getRoot().setDisable(true);
     }
 

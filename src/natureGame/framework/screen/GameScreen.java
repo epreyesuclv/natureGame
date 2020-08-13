@@ -8,7 +8,6 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import natureGame.MyGame;
-import natureGame.Util;
 import natureGame.framework.fileIO.Assets;
 import natureGame.framework.fileIO.Settings;
 import natureGame.framework.graphics.Graphics;
@@ -240,7 +239,7 @@ public class GameScreen extends Screen {
 
         stage.setScene(new Scene(loader.getRoot()));
         stage.initOwner(getPrimaryStage());
-        stage.getIcons().add(Util.getImage("natureGame/Assets/Images/Otros/pie-chart.jpg"));
+        stage.getIcons().add(Assets.pieChart.getImage());
 
         controller.setStage(stage);
         controller.setTitle(titulo);

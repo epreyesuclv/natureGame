@@ -4,22 +4,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import natureGame.MyGame;
-import natureGame.Util;
 import natureGame.framework.fileIO.Settings;
-import natureGame.framework.scene.ConfigurationScene.Dialogs.Chosser;
 import natureGame.framework.scene.ConfigurationScene.Dialogs.ErrorDialog;
 import natureGame.model.Animal;
 import org.controlsfx.control.ToggleSwitch;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import static natureGame.framework.fileIO.Settings.inmoviles;
@@ -138,84 +134,6 @@ public class ConfigurationController {
         dialogStage.showAndWait();
         myGame.unblockStage();
     }
-
-
-    public void chosePlant() {
-        String planta = Util.sPlanta;
-        List<String> list = new ArrayList<>();
-        list.add(planta + "planta2");
-        list.add(planta + "planta3");
-        list.add(planta + "planta4");
-        list.add(planta + "planta5");
-        list.add(planta + "planta6");
-        Util.planta = showChosser(list, imageViewplanta);
-    }
-
-    public void chosePiedra() {
-        String planta = Util.sPiedra;
-        List<String> list = new ArrayList<>();
-        Util.piedra = showChosser(list, imageViewplanta);
-    }
-
-    public void choseConejo() {
-        String planta = Util.sConejo;
-        List<String> list = new ArrayList<>();
-        list.add(planta + "planta2");
-        list.add(planta + "planta3");
-        list.add(planta + "planta4");
-        list.add(planta + "planta5");
-        list.add(planta + "planta6");
-        Util.conejo = showChosser(list, imageViewplanta);
-    }
-
-    public void choseSerpiente() {
-        String planta = Util.sPlanta;
-        List<String> list = new ArrayList<>();
-        list.add(planta + "planta2");
-        list.add(planta + "planta3");
-        list.add(planta + "planta4");
-        list.add(planta + "planta5");
-        list.add(planta + "planta6");
-        Util.serpiente = showChosser(list, imageViewplanta);
-    }
-
-    public void choseLechuza() {
-        String planta = Util.sLechuza;
-        List<String> list = new ArrayList<>();
-        list.add(planta + "planta2");
-        list.add(planta + "planta3");
-        list.add(planta + "planta4");
-        list.add(planta + "planta5");
-        list.add(planta + "planta6");
-        Util.lechuza = showChosser(list, imageViewplanta);
-    }
-
-    public void choseBuitre() {
-        String planta = Util.sBuitre;
-        List<String> list = new ArrayList<>();
-        list.add(planta + "planta2");
-        list.add(planta + "planta3");
-        list.add(planta + "planta4");
-        list.add(planta + "planta5");
-        list.add(planta + "planta6");
-        Util.buitre = showChosser(list, imageViewplanta);
-    }
-
-    public Image showChosser(List<String> list, ImageView view) {
-        Chosser chosser = new Chosser(list, view);
-        Scene scene = new Scene(chosser);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner(myGame.getPrimaryStage());
-        chosser.setStage(stage);
-        myGame.blockStage();
-        stage.showAndWait();
-        myGame.unblockStage();
-        return view.getImage();
-    }
-
     public void setMyGame(MyGame myGame) {
         this.myGame = myGame;
     }
