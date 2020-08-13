@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import natureGame.framework.audio.Audio;
@@ -26,6 +28,7 @@ import natureGame.framework.screen.LoadingScreen;
 import natureGame.framework.screen.Screen;
 import natureGame.model.Animal;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -61,6 +64,9 @@ public class MyGame extends Application implements Game {
         primaryStage.setWidth(1200);
         primaryStage.setHeight(700);
         Settings.initDUMMYList();
+        MediaPlayer media = new MediaPlayer(new Media(new File("src/natureGame/Assets/test.mp3").toURI().toString()));
+        System.out.println(new File("Assets/test.mp3").toURI().toString());
+        media.play();
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         screen = getStartScreen();
         screen.update(0);
