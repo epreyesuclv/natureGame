@@ -21,6 +21,7 @@ public class Render {
         anchor = new MyRoot(1200, 720);
         anchor.getChildren().add(buffer);
 
+
         renderThread = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -37,6 +38,7 @@ public class Render {
 
         };
     }
+
 
     public void resume() {
         running = true;

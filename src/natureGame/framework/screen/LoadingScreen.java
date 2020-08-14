@@ -8,16 +8,15 @@ import natureGame.framework.graphics.Graphics;
 public class LoadingScreen extends Screen {
     public LoadingScreen(Game game) {
         super(game);
-
     }
 
-    @Override
-    public void update(float deltaTime) {
+    public void load() {
         Graphics g = game.getGraphics();
-        Assets.atras = g.newPixmap("natureGame/Assets/Images/Otros/atras.png", 90,90);
-        Assets.X = g.newPixmap("natureGame/Assets/Images/Otros/x.png", 90,90);
-        Assets.gamepad = g.newPixmap("natureGame/Assets/Images/Otros/gamepad-console.jpg", 90,90);
-        Assets.configuration = g.newPixmap("natureGame/Assets/Images/Otros/configuration.png", 90,90);
+        Assets.atras = g.newPixmap("natureGame/Assets/Images/Otros/atras.png", 90, 90);
+        Assets.X = g.newPixmap("natureGame/Assets/Images/Otros/x.png", 90, 90);
+        Assets.configuration = g.newPixmap("natureGame/Assets/Images/Otros/configuration.png", 90, 90);
+        Assets.gamepad = g.newPixmap("natureGame/Assets/Images/Otros/gamepad-console.jpg", 90, 90);
+
         Assets.terreno = g.newPixmap("natureGame/Assets/Images/Resources/Terreno/terreno.png", 0);
 
         Assets.piedra = g.newPixmap("natureGame/Assets/Images/Resources/Piedra/piedra1.png", 0);
@@ -52,6 +51,11 @@ public class LoadingScreen extends Screen {
         Assets.lechuza5 = g.newPixmap("natureGame/Assets/Images/Resources/Buitre/buitre5.png", 0);
         Assets.lechuza6 = g.newPixmap("natureGame/Assets/Images/Resources/Buitre/buitre6.png", 0);
         Assets.load();
+    }
+
+    @Override
+    public void update(float deltaTime) {
+        load();
         game.setScreen(new MenuScreen((MyGame) game));
     }
 

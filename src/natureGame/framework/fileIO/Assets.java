@@ -1,12 +1,16 @@
 package natureGame.framework.fileIO;
 
+import javafx.scene.image.Image;
+import natureGame.framework.graphics.MyPixmap;
 import natureGame.framework.graphics.Pixmap;
 
 public class Assets {
-    public static Pixmap X;
+
     public static Pixmap atras;
+    public static Pixmap X;
     public static Pixmap configuration;
     public static Pixmap gamepad;
+
     public static Pixmap pieChart;
     public static Pixmap guardar;
 
@@ -44,7 +48,7 @@ public class Assets {
     public static Pixmap huesos;
 
     public static void load() {
-        buitres = new Pixmap[]{buitre, buitre2, buitre3, buitre4, buitre5, buitre6};
+         buitres = new Pixmap[]{buitre, buitre2, buitre3, buitre4, buitre5, buitre6};
         conejos = new Pixmap[]{conejo, conejo2, conejo3, conejo4, conejo5, conejo6};
         lechuzas = new Pixmap[]{lechuza, lechuza2, lechuza3, lechuza4, lechuza5, lechuza6};
         serpientes = new Pixmap[]{serpiente6, serpiente2, serpiente3, serpiente4, serpiente5, serpiente6};

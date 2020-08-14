@@ -1,6 +1,8 @@
 package natureGame.framework.scene.MenuScene;
 
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import natureGame.MyGame;
@@ -20,6 +22,21 @@ public class Menu extends AnchorPane {
     }
 
     private void init() {
+        MenuItem fullScreen = new MenuItem("Zoom");
+        fullScreen.setOnAction(e -> {
+            myGame.zoomScreen();
+        });
+        MenuItem normalScreen = new MenuItem("Normal");
+        fullScreen.setOnAction(e -> {
+            myGame.normalScreen();
+        });
+
+        MenuItem miniScreen = new MenuItem("Mini");
+        fullScreen.setOnAction(e -> {
+            myGame.miniScreen();
+        });
+        javafx.scene.control.Menu screen = new javafx.scene.control.Menu("Pantalla", null, fullScreen, normalScreen, miniScreen);
+        getChildren().add(new MenuBar(screen));
        /* MenuItem menuItem1 = new MenuItem("Play");
         menuItem1.setOnAction(event -> main.showMapa());
         MenuItem menuItem = new MenuItem("Configuration");
@@ -69,6 +86,7 @@ public class Menu extends AnchorPane {
         play.setTranslateX(20);
         play.setTranslateY(550);
         play.setOnMouseClicked(event -> {
+            myGame.load();
             myGame.startRendering();
         });
         getChildren().add(play);
