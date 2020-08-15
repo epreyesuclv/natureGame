@@ -18,7 +18,7 @@ public class Settings {
     public static final int FPS = 200;
 
     public static void initDUMMYList() {
-        IMAGE_BOUNDS = ZOOM_BOUNDS;
+        IMAGE_BOUNDS = MINI_BOUNDS;
         int[] cantidades = {0, 20, 30, 30, 20, 20, 20, 40, 40};
         x = cantidades[7];
         y = cantidades[8];
@@ -41,6 +41,7 @@ public class Settings {
             }
 
     }
+
 
     public static void setMini() {
         IMAGE_BOUNDS = MINI_BOUNDS;

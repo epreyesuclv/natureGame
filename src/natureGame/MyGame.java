@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import natureGame.framework.audio.Audio;
+import natureGame.framework.fileIO.Assets;
 import natureGame.framework.fileIO.FileIO;
 import natureGame.framework.fileIO.MyFileIO;
 import natureGame.framework.fileIO.Settings;
@@ -46,13 +47,6 @@ public class MyGame extends Application implements Game {
     private Scene configuration = null;
     private double xOffset;
     private double yOffset;
-
-
-    public Scene getConfiguration() {
-        return configuration;
-    }
-
-
     private static Stage primaryStage;
 
     @Override
@@ -64,8 +58,21 @@ public class MyGame extends Application implements Game {
         // MediaPlayer media = new MediaPlayer(new Media(new File("src/natureGame/Assets/test.mp3").toURI().toString()));
         //media.play();
         primaryStage.initStyle(StageStyle.TRANSPARENT);
-        load();
+        loadMenuImges();
+        showMenu();
         primaryStage.show();
+    }
+
+    private void loadMenuImges() {
+        Graphics g = getGraphics();
+        Assets.fondoCaricatura = g.newPixmap("natureGame/Assets/Images/Otros/fondoCaricatura.jpg", 1200, 720);
+        Assets.fondoDia = g.newPixmap("natureGame/Assets/Images/Otros/fondoDia.jpg", 1200, 720);
+        Assets.fondoNoche = g.newPixmap("natureGame/Assets/Images/Otros/fondoNoche.jpg", 1200, 720);
+        Assets.atras = g.newPixmap("natureGame/Assets/Images/Otros/atras.png", 90, 90);
+        Assets.X = g.newPixmap("natureGame/Assets/Images/Otros/x.png", 90, 90);
+        Assets.configuration = g.newPixmap("natureGame/Assets/Images/Otros/configuration.png", 90, 90);
+        Assets.gamepad = g.newPixmap("natureGame/Assets/Images/Otros/gamepad-console.jpg", 90, 90);
+        Assets.fondoActual = Assets.fondoDia;
     }
 
     public void load() {
@@ -198,19 +205,37 @@ public class MyGame extends Application implements Game {
 
     }
 
-    public void zoomScreen() {
-        Settings.setZoom();
-        screen = getStartScreen();
+    public void changeBacground(int i) {
+        switch (i) {
+            case 0:
+                Assets.fondoActual = Assets.fondoDia;
+                break;
+            case 1:
+                Assets.fondoActual = Assets.fondoNoche;
+                break;
+            case 2:
+                Assets.fondoActual = Assets.fondoCaricatura;
+                break;
+            default:
+                load();
+        }
+
     }
 
-    public void normalScreen() {
-
-        Settings.setNormal();
-        load();
+    public void changeScreen(int i) {
+        switch (i) {
+            case 0:
+                Settings.setZoom();
+                break;
+            case 1:
+                Settings.setNormal();
+                break;
+            case 2:
+                Settings.setMini();
+                break;
+            default:
+                load();
+        }
     }
 
-    public void miniScreen() {
-        Settings.setMini();
-        load();
-    }
 }

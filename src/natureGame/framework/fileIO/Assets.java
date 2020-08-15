@@ -1,7 +1,5 @@
 package natureGame.framework.fileIO;
 
-import javafx.scene.image.Image;
-import natureGame.framework.graphics.MyPixmap;
 import natureGame.framework.graphics.Pixmap;
 
 public class Assets {
@@ -46,9 +44,17 @@ public class Assets {
     public static Pixmap[] serpientes = {serpiente6, serpiente2, serpiente3, serpiente4, serpiente5, serpiente6};
     public static Pixmap terreno;
     public static Pixmap huesos;
+    public static Pixmap fondoDia;
+    public static Pixmap fondoNoche;
+    public static Pixmap fondoCaricatura;
+    public static Pixmap music_on;
+    public static Pixmap music_off;
+    public static Pixmap sfx_on;
+    public static Pixmap sfx_off;
+    public static Pixmap fondoActual;
 
     public static void load() {
-         buitres = new Pixmap[]{buitre, buitre2, buitre3, buitre4, buitre5, buitre6};
+        buitres = new Pixmap[]{buitre, buitre2, buitre3, buitre4, buitre5, buitre6};
         conejos = new Pixmap[]{conejo, conejo2, conejo3, conejo4, conejo5, conejo6};
         lechuzas = new Pixmap[]{lechuza, lechuza2, lechuza3, lechuza4, lechuza5, lechuza6};
         serpientes = new Pixmap[]{serpiente6, serpiente2, serpiente3, serpiente4, serpiente5, serpiente6};
