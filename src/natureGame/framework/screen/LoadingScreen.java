@@ -44,7 +44,9 @@ public class LoadingScreen extends Screen {
         Assets.serpiente4 = g.newPixmap("natureGame/Assets/Images/Resources/Serpiente/serpientev1.png", 0);
         Assets.serpiente5 = g.newPixmap("natureGame/Assets/Images/Resources/Serpiente/serpientev2.png", 0);
         Assets.serpiente6 = g.newPixmap("natureGame/Assets/Images/Resources/Serpiente/serpientev3.png", 0);
-        System.out.println("lllll");//flahsfhadsflfydgyg
+
+        //hola Lary
+
         Assets.lechuza = g.newPixmap("natureGame/Assets/Images/Resources/Hedwig/lechuza1.png", 0);
         Assets.lechuza2 = g.newPixmap("natureGame/Assets/Images/Resources/Hedwig/lechuza2.png", 0);
         Assets.lechuza3 = g.newPixmap("natureGame/Assets/Images/Resources/Hedwig/lechuza3.png", 0);
