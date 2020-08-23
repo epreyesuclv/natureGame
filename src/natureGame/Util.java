@@ -10,7 +10,6 @@ import natureGame.model.Animal;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Util {
 
@@ -113,7 +112,7 @@ public class Util {
         conejo = new Image(sConejo + "conejo2.png", 100, 100, true, true);
         huesos = new Image("natureGame/Assets/Images/Resources/Huesos/huesos.png", 100, 100, true, true);
 
-        serpiente = new Image("natureGame/Assets/Images/Resources/Serpiente/serpiente2.png", 100, 100, true, true);
+        serpiente = new Image("natureGame/Assets/Images/Resources/Serpiente/Serpiente2.png", 100, 100, true, true);
         lechuza = new Image("natureGame/Assets/Images/Resources/Hedwig/hedwig1.png", 100, 100, true, true);
 
         terreno = new Image("natureGame/Assets/Images/Resources/Terreno/terreno.png", IMAGE_BOUNDS, IMAGE_BOUNDS, true, true);
