@@ -69,9 +69,9 @@ public class MyGame extends Application implements Game {
         Assets.fondoDia = g.newPixmap("natureGame/Assets/Images/Otros/fondoDia.jpg", 1200, 720);
         Assets.fondoNoche = g.newPixmap("natureGame/Assets/Images/Otros/fondoNoche.jpg", 1200, 720);
         Assets.atras = g.newPixmap("natureGame/Assets/Images/Otros/atras.png", 90, 90);
-        Assets.X = g.newPixmap("natureGame/Assets/Images/Otros/x.png", 90, 90);
+        Assets.X = g.newPixmap("natureGame/Assets/Images/Otros/xrosa.png", 90, 90);
         Assets.configuration = g.newPixmap("natureGame/Assets/Images/Otros/configuration.png", 90, 90);
-        Assets.gamepad = g.newPixmap("natureGame/Assets/Images/Otros/gamepad-console.jpg", 90, 90);
+        Assets.gamepad = g.newPixmap("natureGame/Assets/Images/Otros/gamepadrosa.png", 90, 90);
         Assets.fondoActual = g.newPixmap("natureGame/Assets/Images/Otros/fondonew.jpg", 1200, 720);
 
     }
