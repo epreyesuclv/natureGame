@@ -6,11 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import natureGame.framework.audio.Audio;
+import natureGame.framework.fileIO.Assets;
 import natureGame.framework.fileIO.FileIO;
 import natureGame.framework.fileIO.MyFileIO;
 import natureGame.framework.fileIO.Settings;
@@ -28,7 +27,6 @@ import natureGame.framework.screen.LoadingScreen;
 import natureGame.framework.screen.Screen;
 import natureGame.model.Animal;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -49,13 +47,6 @@ public class MyGame extends Application implements Game {
     private Scene configuration = null;
     private double xOffset;
     private double yOffset;
-
-
-    public Scene getConfiguration() {
-        return configuration;
-    }
-
-
     private static Stage primaryStage;
 
     @Override
@@ -64,14 +55,29 @@ public class MyGame extends Application implements Game {
         primaryStage.setWidth(1200);
         primaryStage.setHeight(700);
         Settings.initDUMMYList();
-        MediaPlayer media = new MediaPlayer(new Media(new File("src/natureGame/Assets/test.mp3").toURI().toString()));
-        System.out.println(new File("Assets/test.mp3").toURI().toString());
-        media.play();
+        // MediaPlayer media = new MediaPlayer(new Media(new File("src/natureGame/Assets/test.mp3").toURI().toString()));
+        //media.play();
         primaryStage.initStyle(StageStyle.TRANSPARENT);
+        loadMenuImges();
+        showMenu();
+        primaryStage.show();
+    }
+
+    private void loadMenuImges() {
+        Graphics g = getGraphics();
+        Assets.fondoCaricatura = g.newPixmap("natureGame/Assets/Images/Otros/fondoCaricatura.jpg", 1200, 720);
+        Assets.fondoDia = g.newPixmap("natureGame/Assets/Images/Otros/fondoDia.jpg", 1200, 720);
+        Assets.fondoNoche = g.newPixmap("natureGame/Assets/Images/Otros/fondoNoche.jpg", 1200, 720);
+        Assets.atras = g.newPixmap("natureGame/Assets/Images/Otros/atras.png", 90, 90);
+        Assets.X = g.newPixmap("natureGame/Assets/Images/Otros/x.png", 90, 90);
+        Assets.configuration = g.newPixmap("natureGame/Assets/Images/Otros/configuration.png", 90, 90);
+        Assets.gamepad = g.newPixmap("natureGame/Assets/Images/Otros/gamepad-console.jpg", 90, 90);
+        Assets.fondoActual = Assets.fondoDia;
+    }
+
+    public void load() {
         screen = getStartScreen();
         screen.update(0);
-
-        primaryStage.show();
     }
 
     @Override
@@ -85,6 +91,7 @@ public class MyGame extends Application implements Game {
         input = new MyInput(anchor, 1, 1);
         graphics = new MyGraphics(canvas, this);
         gameScene = new Scene(scroll);
+        initDragg(anchor);
     }
 
     public static Stage getPrimaryStage() {
@@ -198,16 +205,37 @@ public class MyGame extends Application implements Game {
 
     }
 
-    public void fullScreen() {
-        primaryStage.setFullScreen(true);
-        canvas.setHeight(primaryStage.getHeight());
-        canvas.setWidth(primaryStage.getWidth());
-        render.changeSize(primaryStage.getWidth(), primaryStage.getHeight());
+    public void changeBacground(int i) {
+        switch (i) {
+            case 0:
+                Assets.fondoActual = Assets.fondoDia;
+                break;
+            case 1:
+                Assets.fondoActual = Assets.fondoNoche;
+                break;
+            case 2:
+                Assets.fondoActual = Assets.fondoCaricatura;
+                break;
+            default:
+                load();
+        }
+
     }
 
-    public void normalScreen() {
-        primaryStage.setFullScreen(false);
-        primaryStage.setHeight(1200);
-        primaryStage.setWidth(700);
+    public void changeScreen(int i) {
+        switch (i) {
+            case 0:
+                Settings.setZoom();
+                break;
+            case 1:
+                Settings.setNormal();
+                break;
+            case 2:
+                Settings.setMini();
+                break;
+            default:
+                load();
+        }
     }
+
 }

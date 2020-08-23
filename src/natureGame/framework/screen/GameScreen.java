@@ -216,18 +216,9 @@ public class GameScreen extends Screen {
             if (!statDeath.stage.isShowing())
                 statDeath.stage.show();
         });
-        MenuItem fullScreen = new MenuItem("Full");
-        fullScreen.setOnAction(e -> {
-            myGame.fullScreen();
-        });
-        MenuItem normalScreen = new MenuItem("Normal");
-        fullScreen.setOnAction(e -> {
-            myGame.normalScreen();
-        });
-        Menu screen = new Menu("Pantalla", null, fullScreen, normalScreen);
         Menu statistics = new Menu("statistics", null, checkMuertos, checkTotal, checkVivios);
         Menu menu = new Menu("game", null, pause, exit);
-        getRoot().getChildren().add(new MenuBar(menu, statistics, screen));
+        getRoot().getChildren().add(new MenuBar(menu, statistics));
 
 
     }

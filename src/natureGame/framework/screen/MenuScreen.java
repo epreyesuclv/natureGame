@@ -10,6 +10,7 @@ public class MenuScreen extends Screen {
         super(game);
         myGame = game;
         myGame.showMenu();
+
     }
 
     @Override

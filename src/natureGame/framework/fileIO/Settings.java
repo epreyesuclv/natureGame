@@ -9,8 +9,8 @@ import java.util.Random;
 public class Settings {
     private static final int NORMAL_BOUNDS = 60;
     private static final int ZOOM_BOUNDS = 90;
-    private static final int MINI_BOUNDS = 36;
-    public static int IMAGE_BOUNDS = MINI_BOUNDS;
+    private static final int MINI_BOUNDS = 42;
+    public static int IMAGE_BOUNDS;
     public static int x = 0;
     public static int y = 0;
     public static List<Animal> list = new ArrayList<>(20);
@@ -18,6 +18,7 @@ public class Settings {
     public static final int FPS = 200;
 
     public static void initDUMMYList() {
+        IMAGE_BOUNDS = MINI_BOUNDS;
         int[] cantidades = {0, 20, 30, 30, 20, 20, 20, 40, 40};
         x = cantidades[7];
         y = cantidades[8];
@@ -39,6 +40,19 @@ public class Settings {
                 map[xx][yy] = i;
             }
 
+    }
+
+
+    public static void setMini() {
+        IMAGE_BOUNDS = MINI_BOUNDS;
+    }
+
+    public static void setNormal() {
+        IMAGE_BOUNDS = NORMAL_BOUNDS;
+    }
+
+    public static void setZoom() {
+        IMAGE_BOUNDS = ZOOM_BOUNDS;
     }
 
 }

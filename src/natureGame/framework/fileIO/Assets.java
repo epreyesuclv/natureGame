@@ -3,10 +3,12 @@ package natureGame.framework.fileIO;
 import natureGame.framework.graphics.Pixmap;
 
 public class Assets {
-    public static Pixmap X;
+
     public static Pixmap atras;
+    public static Pixmap X;
     public static Pixmap configuration;
     public static Pixmap gamepad;
+
     public static Pixmap pieChart;
     public static Pixmap guardar;
 
@@ -42,6 +44,14 @@ public class Assets {
     public static Pixmap[] serpientes = {serpiente6, serpiente2, serpiente3, serpiente4, serpiente5, serpiente6};
     public static Pixmap terreno;
     public static Pixmap huesos;
+    public static Pixmap fondoDia;
+    public static Pixmap fondoNoche;
+    public static Pixmap fondoCaricatura;
+    public static Pixmap music_on;
+    public static Pixmap music_off;
+    public static Pixmap sfx_on;
+    public static Pixmap sfx_off;
+    public static Pixmap fondoActual;
 
     public static void load() {
         buitres = new Pixmap[]{buitre, buitre2, buitre3, buitre4, buitre5, buitre6};

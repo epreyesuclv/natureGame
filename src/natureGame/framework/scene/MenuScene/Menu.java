@@ -1,6 +1,8 @@
 package natureGame.framework.scene.MenuScene;
 
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import natureGame.MyGame;
@@ -20,6 +22,21 @@ public class Menu extends AnchorPane {
     }
 
     private void init() {
+        MenuItem zoomScreen = new MenuItem("Zoom");
+        zoomScreen.setOnAction(e -> {
+            myGame.changeScreen(0);
+        });
+        MenuItem normalScreen = new MenuItem("Normal");
+        normalScreen.setOnAction(e -> {
+            myGame.changeScreen(1);
+        });
+
+        MenuItem miniScreen = new MenuItem("Mini");
+        miniScreen.setOnAction(e -> {
+            myGame.changeScreen(2);
+        });
+        javafx.scene.control.Menu screen = new javafx.scene.control.Menu("Pantalla", null, zoomScreen, normalScreen, miniScreen);
+        getChildren().add(new MenuBar(screen));
        /* MenuItem menuItem1 = new MenuItem("Play");
         menuItem1.setOnAction(event -> main.showMapa());
         MenuItem menuItem = new MenuItem("Configuration");
@@ -41,6 +58,9 @@ public class Menu extends AnchorPane {
 
         setWidth(1200);
         setHeight(720);
+        Canvas fondo = new Canvas(1200, 720);
+        fondo.getGraphicsContext2D().drawImage(Assets.fondoCaricatura.getImage(), 0, 0);
+        getChildren().add(fondo);
         Canvas out = new Canvas(90, 90);
         out.getGraphicsContext2D().drawImage(Assets.X.getImage(), 0, 0);
         out.setTranslateY(20);
@@ -69,6 +89,7 @@ public class Menu extends AnchorPane {
         play.setTranslateX(20);
         play.setTranslateY(550);
         play.setOnMouseClicked(event -> {
+            myGame.load();
             myGame.startRendering();
         });
         getChildren().add(play);
