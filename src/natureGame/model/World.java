@@ -188,32 +188,29 @@ public class World {
     }
 
     public boolean reproduccion(Animal a) {
-        boolean isReproduct = false;
         switch (a.getRefer()) {
             case 3:
                 if (a.contadorDTurnos() == 2) {
-                    isReproduct = true;
                     a.reset();
+                    posicionHijo(a);
+                    return true;
                 }
                 break;
             case 4:
                 if (a.contadorDTurnos() == 3) {
-                    isReproduct = true;
                     a.reset();
+                    posicionHijo(a);
+                    return true;
                 }
                 break;
             case 5:
             case 6:
                 if (a.contadorDTurnos() == 4) {
-                    isReproduct = true;
                     a.reset();
+                    posicionHijo(a);
+                    return true;
                 }
                 break;
-
-        }
-        if (isReproduct) {
-            posicionHijo(a);
-            return true;
         }
         return false;
     }
