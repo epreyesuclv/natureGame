@@ -36,7 +36,6 @@ public class Menu extends AnchorPane {
             myGame.changeScreen(2);
         });
         javafx.scene.control.Menu screen = new javafx.scene.control.Menu("Pantalla", null, zoomScreen, normalScreen, miniScreen);
-        getChildren().add(new MenuBar(screen));
        /* MenuItem menuItem1 = new MenuItem("Play");
         menuItem1.setOnAction(event -> main.showMapa());
         MenuItem menuItem = new MenuItem("Configuration");
@@ -94,5 +93,8 @@ public class Menu extends AnchorPane {
         });
         getChildren().add(play);
         myGame.initDragg(this);
+        getChildren().add(new MenuBar(screen));
+
     }
+
 }

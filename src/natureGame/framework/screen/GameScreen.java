@@ -72,8 +72,8 @@ public class GameScreen extends Screen {
         world.update(deltaTime);
         updateTick += deltaTime;
 
-        if (updateTick > 1.0f) {
-            updateTick -= 1.0f;
+        if (updateTick > 0.5f) {
+            updateTick -= 0.5f;
             if (statVivos != null) {
                 statVivos.updateElement(world.buffervivos);
 
