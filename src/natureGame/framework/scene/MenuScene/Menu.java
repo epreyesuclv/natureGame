@@ -59,7 +59,7 @@ public class Menu extends AnchorPane {
         setWidth(1200);
         setHeight(720);
         Canvas fondo = new Canvas(1200, 720);
-        fondo.getGraphicsContext2D().drawImage(Assets.fondoCaricatura.getImage(), 0, 0);
+        fondo.getGraphicsContext2D().drawImage(Assets.fondoActual.getImage(), 0, 0);
         getChildren().add(fondo);
         Canvas out = new Canvas(90, 90);
         out.getGraphicsContext2D().drawImage(Assets.X.getImage(), 0, 0);
