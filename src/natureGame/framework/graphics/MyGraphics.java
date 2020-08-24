@@ -19,7 +19,7 @@ public class MyGraphics implements Graphics {
 
     @Override
     public Pixmap newPixmap(String fileName, int xbound, int ybound) {
-        image = new Image(fileName, xbound, ybound, true, false);
+        image = new Image(fileName, xbound, ybound, false, false);
         return new MyPixmap(image);
     }
 
