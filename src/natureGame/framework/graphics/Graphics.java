@@ -1,5 +1,8 @@
 package natureGame.framework.graphics;
 
+/**
+ * interface principal de los graficos
+ **/
 public interface Graphics {
 
     Pixmap newPixmap(String fileName, int xbound, int ybound);

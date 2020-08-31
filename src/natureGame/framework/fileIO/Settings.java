@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * clase q cambia las configuraciones de la aplicacion
+ */
+
 public class Settings {
     private static final int NORMAL_BOUNDS = 60;
     private static final int ZOOM_BOUNDS = 90;
@@ -13,10 +17,11 @@ public class Settings {
     public static int IMAGE_BOUNDS;
     public static int x = 0;
     public static int y = 0;
-    public static List<Animal> list = new ArrayList<>(20);
-    public static List<Animal> inmoviles = new ArrayList<>(20);
+    public static List<Animal> list = new ArrayList<>(20);//lista inicial de animales
+    public static List<Animal> inmoviles = new ArrayList<>(20);//lista inicial de objetos inmoviles
     public static final int FPS = 200;
 
+    //inicia las listas por defecto
     public static void initDUMMYList() {
         IMAGE_BOUNDS = MINI_BOUNDS;
         int[] cantidades = {0, 20, 30, 30, 20, 20, 20, 40, 40};
@@ -42,7 +47,9 @@ public class Settings {
 
     }
 
-
+    /**
+     * usado para cambiar el tamanho de las casillas
+     **/
     public static void setMini() {
         IMAGE_BOUNDS = MINI_BOUNDS;
     }

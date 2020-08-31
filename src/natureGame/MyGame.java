@@ -25,22 +25,24 @@ import natureGame.framework.scene.MenuScene.Menu;
 import natureGame.framework.screen.GameScreen;
 import natureGame.framework.screen.LoadingScreen;
 import natureGame.framework.screen.Screen;
-import natureGame.model.Animal;
 
 import java.io.IOException;
-import java.util.List;
 
+/**
+ * clase principal, donde se implementan la interface Game del framework utilizado en la aplicacion
+ * aqui tambien se encuentra el hilo principal de javafx
+ */
 public class MyGame extends Application implements Game {
 
 
     private static AnchorPane anchor;
-    Graphics graphics;
-    Audio audio;
-    FileIO fileIO;
-    Input input;
-    Screen screen;
-    Render render;
-    Canvas canvas;
+    private Graphics graphics;
+    private Audio audio;
+    private FileIO fileIO;
+    private Input input;
+    private Screen screen;
+    private Render render;
+    private Canvas canvas;
 
     private Scene gameScene = null;
     private Scene menu = null;
@@ -139,26 +141,24 @@ public class MyGame extends Application implements Game {
 
     }
 
-
+    //hilo principal
     public static void main(String[] args) {
         launch(args);
     }
 
-    public List<Animal> getList() {
-        return Util.initList;
+    //devuelve el root del renderizado de la simulacion
+    public static AnchorPane getRoot() {
+        return anchor;
     }
 
+    //bloquea la Stage principal
     public void blockStage() {
         primaryStage.getScene().getRoot().setDisable(true);
     }
 
+    //desbloquea la Stage principal
     public void unblockStage() {
         primaryStage.getScene().getRoot().setDisable(false);
-    }
-
-    @Override
-    public Graphics getGraphics() {
-        return graphics;
     }
 
     @Override
@@ -194,8 +194,10 @@ public class MyGame extends Application implements Game {
         return screen;
     }
 
-    public Screen getStartScreen() {
-        return new LoadingScreen(this);
+    //lo siguiente son las implementaciones de de los metodos de la clase abstracta Game
+    @Override
+    public Graphics getGraphics() {
+        return graphics;
     }
 
 
@@ -205,18 +207,20 @@ public class MyGame extends Application implements Game {
 
     }
 
-    public static AnchorPane getRoot() {
-        return anchor;
+    //carga el LoadingScreen
+    public Screen getStartScreen() {
+        return new LoadingScreen(this);
     }
 
+    //comienza la simulacion
     public void startRendering() {
         primaryStage.setScene(gameScene);
         setScreen(new GameScreen(this));
         render.resume();
-
     }
 
-    public void changeBacground(int i) {
+    //cambia el fondo del menu
+    public void changeBackground(int i) {
         switch (i) {
             case 0:
                 Assets.fondoActual = Assets.fondoDia;
@@ -233,6 +237,7 @@ public class MyGame extends Application implements Game {
 
     }
 
+    //cambia el tamahno de las casillas en la simulacion
     public void changeScreen(int i) {
         switch (i) {
             case 0:

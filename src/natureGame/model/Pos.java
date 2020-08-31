@@ -1,4 +1,8 @@
 package natureGame.model;
+/**
+ * clase utilizada para facilitar el calculo en la clase World
+ * guarda una posision y una referencia
+ */
 
 import java.util.Objects;
 
