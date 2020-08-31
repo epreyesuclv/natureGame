@@ -55,11 +55,6 @@ public class MyGame extends Application implements Game {
 
     }
 
-    //hilo principal
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     //hilo principal de javafx
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -93,6 +88,8 @@ public class MyGame extends Application implements Game {
     public void load() {
         screen = getStartScreen();
         screen.update(0);
+
+        primaryStage.show();
     }
 
     //metodo q se ejecuta antes de start por el hilo de javafx
@@ -140,6 +137,11 @@ public class MyGame extends Application implements Game {
             primaryStage.setY(event.getScreenY() - yOffset);
         });
 
+    }
+
+
+    public static void main(String[] args) {
+        launch(args);
     }
 
     public List<Animal> getList() {
@@ -246,5 +248,4 @@ public class MyGame extends Application implements Game {
                 load();
         }
     }
-
 }

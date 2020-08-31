@@ -1,10 +1,6 @@
 package natureGame.model;
 
-import javafx.scene.image.Image;
-import natureGame.Util;
 import natureGame.framework.fileIO.Settings;
-
-import java.util.List;
 
 public class Animal extends Pos {
     boolean twice = false;
