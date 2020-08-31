@@ -49,6 +49,18 @@ public class MyGame extends Application implements Game {
     private double yOffset;
     private static Stage primaryStage;
 
+    //devuelve el Stage principal
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+
+    }
+
+    //hilo principal
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    //hilo principal de javafx
     @Override
     public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
@@ -63,6 +75,7 @@ public class MyGame extends Application implements Game {
         primaryStage.show();
     }
 
+    //carga las imagenes de la primera pantalla
     private void loadMenuImges() {
         Graphics g = getGraphics();
         Assets.fondoCaricatura = g.newPixmap("natureGame/Assets/Images/Otros/FondoCaricatura.jpg", 1200, 720);
@@ -76,11 +89,13 @@ public class MyGame extends Application implements Game {
 
     }
 
+    //ejecuta la clase q carga las imagenes de los elementos
     public void load() {
         screen = getStartScreen();
         screen.update(0);
     }
 
+    //metodo q se ejecuta antes de start por el hilo de javafx
     @Override
     public void init() throws Exception {
         canvas = new Canvas(1200, 700);
@@ -95,17 +110,14 @@ public class MyGame extends Application implements Game {
         initDragg(anchor);
     }
 
-    public static Stage getPrimaryStage() {
-        return primaryStage;
-
-    }
-
+    //muestra la pantalla de menu
     public void showMenu() {
         Menu m = new Menu(this, canvas);
         menu = new Scene(m);
         primaryStage.setScene(menu);
     }
 
+    //muestra la pantalla de configuraciones
     public void showConfiguration() throws IOException {
         FXMLLoader loader = new FXMLLoader(MyGame.class.getResource("framework/scene/ConfigurationScene/configuration.fxml"));
         loader.load();
@@ -117,6 +129,7 @@ public class MyGame extends Application implements Game {
 
     }
 
+    //es usado para q la pantalla se pueda  arrastrar desde cualkier lugar
     public void initDragg(Parent p) {
         p.setOnMousePressed(event -> {
             xOffset = event.getSceneX();
@@ -127,11 +140,6 @@ public class MyGame extends Application implements Game {
             primaryStage.setY(event.getScreenY() - yOffset);
         });
 
-    }
-
-
-    public static void main(String[] args) {
-        launch(args);
     }
 
     public List<Animal> getList() {
