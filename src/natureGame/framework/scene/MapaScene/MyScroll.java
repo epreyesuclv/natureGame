@@ -11,6 +11,7 @@ import javafx.scene.control.ScrollPane;
 public class MyScroll extends ScrollPane {
 
     public MyScroll() {
+        setMaxSize(1200, 700);
     }
 
     public MyScroll(Node content) {

@@ -49,6 +49,7 @@ public class GameScreen extends Screen {
         state = GameState.Running;
         game.changeSize(Settings.x * IMAGE_BOUNDS, Settings.y * IMAGE_BOUNDS);
         createMenu();
+
     }
 
     @Override
@@ -104,7 +105,6 @@ public class GameScreen extends Screen {
     }
 
     private void presentPause(float deltaTime) {
-
     }
 
     //si la simulacion esta activa se dibujan todos los elementos del sistema en su posicion excepto el q se esta moviendo,

@@ -2,7 +2,6 @@ package natureGame.framework.graphics;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Paint;
 import natureGame.framework.fileIO.Settings;
 import natureGame.framework.game.Game;
 
@@ -13,7 +12,6 @@ import natureGame.framework.game.Game;
 public class MyGraphics implements Graphics {
     Image image;
     Canvas canvas;
-    Paint paint;
     Game game;
 
     public MyGraphics(Canvas canvas, Game game) {

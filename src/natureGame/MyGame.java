@@ -16,6 +16,7 @@ import natureGame.framework.fileIO.Settings;
 import natureGame.framework.game.Game;
 import natureGame.framework.graphics.Graphics;
 import natureGame.framework.graphics.MyGraphics;
+import natureGame.framework.graphics.MyRoot;
 import natureGame.framework.graphics.Render;
 import natureGame.framework.scene.ConfigurationScene.ConfigurationController;
 import natureGame.framework.scene.MapaScene.MyScroll;
@@ -34,6 +35,7 @@ public class MyGame extends Application implements Game {
 
 
     private static AnchorPane anchor;
+    private static MyRoot root;
     Graphics graphics;
     Audio audio;
     FileIO fileIO;
@@ -48,7 +50,7 @@ public class MyGame extends Application implements Game {
     private double yOffset;
 
     public static AnchorPane getRoot() {
-        return anchor;
+        return root;
     }
 
 
@@ -112,10 +114,12 @@ public class MyGame extends Application implements Game {
         fileIO = new MyFileIO(this);
         render = new Render(this, canvas);
         anchor = render.anchor;
+        root = new MyRoot(1200, 700);
         MyScroll scroll = new MyScroll();
         scroll.setContent(anchor);
+        root.getChildren().add(scroll);
         graphics = new MyGraphics(canvas, this);
-        gameScene = new Scene(scroll);
+        gameScene = new Scene(root);
         initDragg(anchor);
     }
 

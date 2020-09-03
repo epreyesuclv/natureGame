@@ -109,15 +109,21 @@ public class ConfigurationController {
         Settings.y = cantidades[8];
         Settings.list = new ArrayList<>();
         inmoviles = new ArrayList<>();
-        long[][] map = new long[Settings.x][Settings.y];
+        int[][] map = new int[Settings.x][Settings.y];
         for (int i = 1; i < 7; i++) {
             for (int j = 0; j < cantidades[i]; j++) {
                 Random rand = new Random();
                 int x = Math.abs(rand.nextInt() % Settings.x);
                 int y = Math.abs(rand.nextInt() % Settings.y);
                 while (map[x][y] != 0) {
-                    x = Math.abs(rand.nextInt() % Settings.x);
-                    y = Math.abs(rand.nextInt() % Settings.y);
+                    x++;
+                    if (x == Settings.x) {
+                        x = 0;
+                        y++;
+                    }
+                    if (y == Settings.y) {
+                        y = 0;
+                    }
                 }
                 if (i == 1 || i == 2)
                     Settings.inmoviles.add(new Animal(x, y, i));

@@ -19,6 +19,7 @@ public class LoadingScreen extends Screen {
         Graphics g = game.getGraphics();
         Assets.terreno = g.newPixmap("natureGame/Assets/Images/Resources/Terreno/cesped.png", 0);
         Assets.huesos = g.newPixmap("natureGame/Assets/Images/Resources/Huesos/huesos.png", 0);
+        Assets.pieChart = g.newPixmap("natureGame/Assets/Images/Otros/pie-chart.jpg", 0);
 
         Assets.conejo2 = g.newPixmap("natureGame/Assets/Images/Resources/Conejo/Conejo2.png", 0);
         Assets.conejo3 = g.newPixmap("natureGame/Assets/Images/Resources/Conejo/conejo8.png", 0);
