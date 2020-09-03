@@ -1,4 +1,7 @@
 package natureGame.framework.screen;
+/**
+ * Es la clase q se encarga de toda la actualizacion de los datos y el dibujado en la pantalla
+ */
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -55,6 +58,7 @@ public class GameScreen extends Screen {
         if (state == GameState.GameOver) updateGameOver(deltaTime);
     }
 
+    //si la simulacion se termina se va a la pantalla de menu
     private void updateGameOver(float deltaTime) {
         world = null;
         statDeath = null;
@@ -67,6 +71,8 @@ public class GameScreen extends Screen {
 
     }
 
+    //aki se llama el metodo World.update() q es el modelo utilizado en la simulacion y se actualiza las estadisticas
+    // si se estan mostrando en pantalla
     private void updateRunnig(float deltaTime) {
         world.update(deltaTime);
         updateTick += deltaTime;
@@ -88,6 +94,7 @@ public class GameScreen extends Screen {
             }
         }
     }
+    //metodo q segun el estado en q este la simulacion actualiza los graficos de cierta manera
 
     @Override
     public void present(float deltaTime) {
@@ -100,6 +107,9 @@ public class GameScreen extends Screen {
 
     }
 
+    //si la simulacion esta activa se dibujan todos los elementos del sistema en su posicion excepto el q se esta moviendo,
+    // pues ese se dibuja segun en la posicion exacta en q se encuentra, se carga la imagen q le corresponde a la animaciona de dicho animal
+    //  y esa es la q se dibuja
     private void presentRunnig(float deltaTime) {
         Graphics g = game.getGraphics();
         g.clear(0);
@@ -165,6 +175,7 @@ public class GameScreen extends Screen {
         game.setScreen(new MenuScreen((MyGame) game));
     }
 
+    //se crea el menu de opciones de la parte superior derecha con sus eventos click asociados
     private void createMenu() {
         MenuItem pause = new MenuItem("pause");
         pause.setOnAction(event -> {
@@ -222,8 +233,9 @@ public class GameScreen extends Screen {
 
     }
 
+    //metodo q se encarga de ejecutar la pantalla de estadisticas
     private Statistics showStatistics(String titulo) throws IOException {
-        FXMLLoader loader = new FXMLLoader(MyGame.class.getResource("framework/scene/MapaScene/barChart.fxml"));
+        FXMLLoader loader = new FXMLLoader(MyGame.class.getResource("framework/scene/MapaScene/pieChart.fxml"));
         loader.load();
         Statistics controller = loader.getController();
         Stage stage = new Stage();

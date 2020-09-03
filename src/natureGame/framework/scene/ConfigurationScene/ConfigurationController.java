@@ -1,4 +1,8 @@
 package natureGame.framework.scene.ConfigurationScene;
+/**
+ * Es la clase controladora del fxml configuration.fxml,
+ * se encargade gestionar los errores en los campos y de guardar las confuguraciones q el usuario defina
+ */
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +37,7 @@ public class ConfigurationController {
     private double xOffset;
     private double yOffset;
 
+    //checkea si hay alguna campo mal
     private boolean check() throws IOException {
         TextField[] textFieldList = new TextField[]{null, textFieldpiedras, textFieldplantas, textFieldconejos, textFieldserpientes, textFieldlechuzas, textFieldbuitres, ancho, largo};
 
@@ -75,7 +80,7 @@ public class ConfigurationController {
 
     }
 
-
+    //gestiona el evento de la imagen "Atras" se encarga de salir de la pantalla de configuracion
     public void exit() throws IOException {
         if (tswich.isSelected()) {
             if (check())
@@ -87,6 +92,7 @@ public class ConfigurationController {
 
     }
 
+    //en caso de q el usuario halla guardado las configuraciones iniciales se guardan
     private void save(int[] cantidades) {
         Settings.x = cantidades[7];
         Settings.y = cantidades[8];
@@ -113,6 +119,7 @@ public class ConfigurationController {
 
     }
 
+    //se encarga de llamar al ErrorDialog y bloaquear el Stage princiapal
     public void showError(String text) throws IOException {
         FXMLLoader loader = new FXMLLoader(MyGame.class.getResource("framework/scene/ConfigurationScene/Dialogs/errorDialog.fxml"));
         loader.load();
@@ -134,6 +141,8 @@ public class ConfigurationController {
         dialogStage.showAndWait();
         myGame.unblockStage();
     }
+
+    //
     public void setMyGame(MyGame myGame) {
         this.myGame = myGame;
     }

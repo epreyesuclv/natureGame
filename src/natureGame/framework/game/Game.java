@@ -4,7 +4,6 @@ package natureGame.framework.game;
 import natureGame.framework.audio.Audio;
 import natureGame.framework.fileIO.FileIO;
 import natureGame.framework.graphics.Graphics;
-import natureGame.framework.input.Input;
 import natureGame.framework.screen.Screen;
 
 /**
@@ -16,8 +15,6 @@ public interface Game {
     Audio getAudio();
 
     FileIO getFileIO();
-
-    Input getInput();
 
     void setScreen(Screen screen);
 

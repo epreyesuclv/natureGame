@@ -47,7 +47,7 @@ public class World {
 
     public void update(float deltaTime) {
         if (gameOver) return;
-        if (currentAnimal.isMoving != 0) {
+        if (currentAnimal.getIsMoving() != 0) {
             if (currentAnimal.keepMoving()) {
                 mapa[currentAnimal.getX()][currentAnimal.getY()] = currentAnimal.getRefer();
                 next();

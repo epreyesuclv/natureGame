@@ -1,4 +1,7 @@
 package natureGame.framework.graphics;
+/**
+ * comportamiento q debe tener la clase q gestiona las imagenes
+ */
 
 import javafx.scene.image.Image;
 

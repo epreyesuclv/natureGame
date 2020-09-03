@@ -17,8 +17,6 @@ import natureGame.framework.game.Game;
 import natureGame.framework.graphics.Graphics;
 import natureGame.framework.graphics.MyGraphics;
 import natureGame.framework.graphics.Render;
-import natureGame.framework.input.Input;
-import natureGame.framework.input.MyInput;
 import natureGame.framework.scene.ConfigurationScene.ConfigurationController;
 import natureGame.framework.scene.MapaScene.MyScroll;
 import natureGame.framework.scene.MenuScene.Menu;
@@ -36,19 +34,24 @@ public class MyGame extends Application implements Game {
 
 
     private static AnchorPane anchor;
-    private Graphics graphics;
-    private Audio audio;
-    private FileIO fileIO;
-    private Input input;
-    private Screen screen;
-    private Render render;
-    private Canvas canvas;
+    Graphics graphics;
+    Audio audio;
+    FileIO fileIO;
+    Screen screen;
+    Render render;
+    Canvas canvas;
 
     private Scene gameScene = null;
     private Scene menu = null;
     private Scene configuration = null;
     private double xOffset;
     private double yOffset;
+
+    public static AnchorPane getRoot() {
+        return anchor;
+    }
+
+
     private static Stage primaryStage;
 
     //devuelve el Stage principal
@@ -103,7 +106,6 @@ public class MyGame extends Application implements Game {
         anchor = render.anchor;
         MyScroll scroll = new MyScroll();
         scroll.setContent(anchor);
-        input = new MyInput(anchor, 1, 1);
         graphics = new MyGraphics(canvas, this);
         gameScene = new Scene(scroll);
         initDragg(anchor);
@@ -146,10 +148,6 @@ public class MyGame extends Application implements Game {
         launch(args);
     }
 
-    //devuelve el root del renderizado de la simulacion
-    public static AnchorPane getRoot() {
-        return anchor;
-    }
 
     //bloquea la Stage principal
     public void blockStage() {
@@ -161,6 +159,10 @@ public class MyGame extends Application implements Game {
         primaryStage.getScene().getRoot().setDisable(false);
     }
 
+    public Scene getConfiguration() {
+        return configuration;
+    }
+
     @Override
     public Audio getAudio() {
         return audio;
@@ -169,11 +171,6 @@ public class MyGame extends Application implements Game {
     @Override
     public FileIO getFileIO() {
         return fileIO;
-    }
-
-    @Override
-    public Input getInput() {
-        return input;
     }
 
     @Override
@@ -207,7 +204,6 @@ public class MyGame extends Application implements Game {
 
     }
 
-    //carga el LoadingScreen
     public Screen getStartScreen() {
         return new LoadingScreen(this);
     }

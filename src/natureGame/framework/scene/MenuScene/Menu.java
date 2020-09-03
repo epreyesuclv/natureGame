@@ -1,4 +1,8 @@
 package natureGame.framework.scene.MenuScene;
+/**
+ * el root de la pantalla de Menu
+ * en ella se gestionan todos los eventos click asociados a esta pantalla
+ */
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.MenuBar;
@@ -22,6 +26,7 @@ public class Menu extends AnchorPane {
     }
 
     private void init() {
+        //menu de opciones para cambiarle el tamanho a las casillas de los animales en la simulanion
         MenuItem zoomScreen = new MenuItem("Zoom");
         zoomScreen.setOnAction(e -> {
             myGame.changeScreen(0);
@@ -36,25 +41,7 @@ public class Menu extends AnchorPane {
             myGame.changeScreen(2);
         });
         javafx.scene.control.Menu screen = new javafx.scene.control.Menu("Pantalla", null, zoomScreen, normalScreen, miniScreen);
-       /* MenuItem menuItem1 = new MenuItem("Play");
-        menuItem1.setOnAction(event -> main.showMapa());
-        MenuItem menuItem = new MenuItem("Configuration");
-        menuItem.setOnAction(event -> {
-            try {
-                main.showConfiguration();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        javafx.scene.control.Menu menu = new javafx.scene.control.Menu("Game", null, menuItem, menuItem1);
-        MenuBar menuBar = new MenuBar(menu);
-        getChildren().add(menuBar);// Barra de Menu
-
-        Canvas canvas = new Canvas(1500, 1500);//probando el Scroll
-        ScrollPane scrool = new ScrollPane(canvas);
-        scrool.setMaxSize(500, 500);
-        getChildren().add(scrool);*/
-
+//los demas botones y sus eventos click asosiados
         setWidth(1200);
         setHeight(720);
         Canvas fondo = new Canvas(1200, 720);

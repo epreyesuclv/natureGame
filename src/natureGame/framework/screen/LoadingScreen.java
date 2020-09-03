@@ -1,4 +1,7 @@
 package natureGame.framework.screen;
+/**
+ * es la encargada de inicializar las imagenes q se van a utilizar en la simulacion
+ */
 
 import natureGame.MyGame;
 import natureGame.framework.fileIO.Assets;
@@ -44,7 +47,6 @@ public class LoadingScreen extends Screen {
         Assets.serpiente5 = g.newPixmap("natureGame/Assets/Images/Resources/Serpiente/serpientev2.png", 0);
         Assets.serpiente6 = g.newPixmap("natureGame/Assets/Images/Resources/Serpiente/serpientev3.png", 0);
 
-        //hola Lary
 
         Assets.lechuza = g.newPixmap("natureGame/Assets/Images/Resources/Hedwig/lechuza1.png", 0);
         Assets.lechuza2 = g.newPixmap("natureGame/Assets/Images/Resources/Hedwig/lechuza2.png", 0);
