@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.241" xmlns:fx="http://javafx.com/fxml/1" fx:controller="natureGame.framework.scene.MapaScene.Statistics">
+   <children>
+      <PieChart fx:id="pieChart" layoutX="157.0" prefHeight="400.0" prefWidth="443.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="157.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label fx:id="plantasLabel" layoutX="16.0" layoutY="37.0" prefHeight="17.0" prefWidth="124.0" text="plantas" />
+      <Label fx:id="conejosLabel" layoutX="16.0" layoutY="68.0" prefHeight="17.0" prefWidth="124.0" text="conejos" />
+      <Label fx:id="serpientesLabel" layoutX="16.0" layoutY="101.0" prefHeight="17.0" prefWidth="124.0" text="serpientes" />
+      <Label fx:id="lechuzasLabel" layoutX="16.0" layoutY="134.0" prefHeight="17.0" prefWidth="124.0" text="lechuzas" />
+      <Label fx:id="buitresLabel" layoutX="16.0" layoutY="165.0" prefHeight="17.0" prefWidth="124.0" text="buitres" />
+   </children>
+</AnchorPane>
