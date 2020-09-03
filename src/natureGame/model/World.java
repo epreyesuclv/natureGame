@@ -13,7 +13,7 @@ public class World {
     public int[] bufferTotal;
     public List<Animal> muertos;
     public Animal currentAnimal;
-    List<Animal> inmovilList;
+    private List<Animal> inmovilList;
     private boolean gameOver = false;
     //  float tickTime = 0;
     // float tick = 2.0f;

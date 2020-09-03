@@ -6,6 +6,7 @@ package natureGame.framework.scene.ConfigurationScene;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -13,6 +14,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import natureGame.MyGame;
+import natureGame.framework.fileIO.Assets;
 import natureGame.framework.fileIO.Settings;
 import natureGame.framework.scene.ConfigurationScene.Dialogs.ErrorDialog;
 import natureGame.model.Animal;
@@ -28,14 +30,23 @@ public class ConfigurationController {
     private MyGame myGame;
 
     @FXML
-    public ToggleSwitch tswich;
+    private ToggleSwitch tswich;
     @FXML
-    public TextField textFieldpiedras, textFieldplantas, textFieldconejos, textFieldserpientes, textFieldlechuzas, textFieldbuitres, ancho, largo;
+    private TextField textFieldpiedras, textFieldplantas, textFieldconejos, textFieldserpientes, textFieldlechuzas, textFieldbuitres, ancho, largo;
     @FXML
-    public ImageView imageViewpiedra, imageViewplanta, imageViewconejo, imageViewserpiente, imageViewlechuza, imageViewbuitre;
+    private ImageView imageViewpiedra, imageViewplanta, imageViewconejo, imageViewserpiente, imageViewlechuza, imageViewbuitre;
+    @FXML
+    private ImageView imageViewAtras;
 
-    private double xOffset;
-    private double yOffset;
+    public void initialize() {
+        imageViewAtras.setImage(Assets.atras.getImage());
+        imageViewpiedra.setImage(Assets.piedra.getImage());
+        imageViewplanta.setImage(Assets.planta.getImage());
+        imageViewconejo.setImage(Assets.conejo.getImage());
+        imageViewserpiente.setImage(Assets.serpiente.getImage());
+        imageViewlechuza.setImage(Assets.lechuza.getImage());
+        imageViewbuitre.setImage(Assets.buitre.getImage());
+    }
 
     //checkea si hay alguna campo mal
     private boolean check() throws IOException {
@@ -98,7 +109,7 @@ public class ConfigurationController {
         Settings.y = cantidades[8];
         Settings.list = new ArrayList<>();
         inmoviles = new ArrayList<>();
-        int[][] map = new int[Settings.x][Settings.y];
+        long[][] map = new long[Settings.x][Settings.y];
         for (int i = 1; i < 7; i++) {
             for (int j = 0; j < cantidades[i]; j++) {
                 Random rand = new Random();
@@ -143,7 +154,7 @@ public class ConfigurationController {
     }
 
     //
-    public void setMyGame(MyGame myGame) {
+    public void setMyGame(MyGame myGame, Parent root) {
         this.myGame = myGame;
     }
 }

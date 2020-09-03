@@ -70,13 +70,13 @@ public class MyGame extends Application implements Game {
         // MediaPlayer media = new MediaPlayer(new Media(new File("src/natureGame/Assets/test.mp3").toURI().toString()));
         //media.play();
         primaryStage.initStyle(StageStyle.TRANSPARENT);
-        loadMenuImges();
+        loadMenuImages();
         showMenu();
         primaryStage.show();
     }
 
     //carga las imagenes de la primera pantalla
-    private void loadMenuImges() {
+    private void loadMenuImages() {
         Graphics g = getGraphics();
         Assets.fondoCaricatura = g.newPixmap("natureGame/Assets/Images/Otros/FondoCaricatura.jpg", 1200, 720);
         Assets.fondoDia = g.newPixmap("natureGame/Assets/Images/Otros/fondoDia.jpg", 1200, 720);
@@ -86,6 +86,14 @@ public class MyGame extends Application implements Game {
         Assets.configuration = g.newPixmap("natureGame/Assets/Images/Otros/configuration.png", 90, 90);
         Assets.gamepad = g.newPixmap("natureGame/Assets/Images/Otros/gamepadrosa.png", 90, 90);
         Assets.fondoActual = g.newPixmap("natureGame/Assets/Images/Otros/fondonew.jpg", 1200, 720);
+
+        Assets.piedra = g.newPixmap("natureGame/Assets/Images/Resources/Piedra/piedra4.png", 0);
+        Assets.planta = g.newPixmap("natureGame/Assets/Images/Resources/Planta/elmejor.png", 0);
+        Assets.conejo = g.newPixmap("natureGame/Assets/Images/Resources/Conejo/Conejo1.png", 0);
+        Assets.serpiente = g.newPixmap("natureGame/Assets/Images/Resources/Serpiente/serpiente1.png", 0);
+        Assets.lechuza = g.newPixmap("natureGame/Assets/Images/Resources/Hedwig/lechuza1.png", 0);
+        Assets.buitre = g.newPixmap("natureGame/Assets/Images/Resources/Buitre/buitre1.png", 0);
+
 
     }
 
@@ -125,7 +133,8 @@ public class MyGame extends Application implements Game {
         Parent root = loader.getRoot();
         ConfigurationController controller = loader.getController();
         configuration = new Scene(root);
-        controller.setMyGame(this);
+        controller.setMyGame(this, root);
+        initDragg(root);
         primaryStage.setScene(configuration);
 
     }
