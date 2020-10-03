@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="NatureGame:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/NatureGame_jar</output-path>
+    <root id="archive" name="NatureGame.jar">
+      <element id="module-output" name="NatureGame" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../Install/ForPrograming/Java/controlsfx-8.40.10.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
