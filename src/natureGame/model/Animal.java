@@ -3,6 +3,7 @@ package natureGame.model;
 /**
  * esta clase es utilizada para representar un elemento movil en la naturaleza
  **/
+//ivett
 public class Animal extends Pos {
     /**
      * estos atributos son especificos para los buitres
@@ -19,8 +20,6 @@ public class Animal extends Pos {
     private int isMoving;
     private int direccX;
     private int direccY;
-    public int x;//posicion en metapixeles; 1 metapixel = 90/6 pixeles
-    public int y;//posicion en metapixeles; 1 metapixel = 90/6 pixeles
 
     //constructor
     public Animal(int x, int y, int refer) {

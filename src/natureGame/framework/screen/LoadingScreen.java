@@ -6,7 +6,7 @@ package natureGame.framework.screen;
 import natureGame.MyGame;
 import natureGame.framework.fileIO.Assets;
 import natureGame.framework.graphics.Graphics;
-
+//lary
 public class LoadingScreen extends Screen {
     public LoadingScreen(MyGame game) {
         super(game);

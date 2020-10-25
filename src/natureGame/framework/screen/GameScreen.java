@@ -24,6 +24,7 @@ import static natureGame.MyGame.getPrimaryStage;
 import static natureGame.MyGame.getRoot;
 import static natureGame.framework.fileIO.Settings.IMAGE_BOUNDS;
 
+//elieser
 public class GameScreen extends Screen {
     private World world;
     private Statistics statTotal;
@@ -68,6 +69,7 @@ public class GameScreen extends Screen {
         statVivos = null;
         game.getGraphics().clear(0);
         myGame.showMenu();
+        Settings.initDUMMYList();
 
     }
 

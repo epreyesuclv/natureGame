@@ -25,9 +25,14 @@ public class Settings {
     private static final int MINI_BOUNDS = 30;
 
     //inicia las listas por defecto
-    public static void initDUMMYList() {
+    public static void init() {
         IMAGE_BOUNDS = MINI_BOUNDS;
         FPS = SLOW;
+    }
+
+    public static void initDUMMYList() {
+        inmoviles.clear();
+        list.clear();
         int[] cantidades = {0, 20, 20, 20, 20, 20, 20, 40, 40};
         x = cantidades[7];
         y = cantidades[8];

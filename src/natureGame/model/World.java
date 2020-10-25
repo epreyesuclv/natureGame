@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+//ivett
 public class World {
     public List<Animal> vivos;
     public int[] buffervivos;
@@ -15,14 +16,12 @@ public class World {
     public Animal currentAnimal;
     private List<Animal> inmovilList;
     private boolean gameOver = false;
-    //  float tickTime = 0;
-    // float tick = 2.0f;
     public int[][] mapa;
     public int[][] mapa2;
     int nextIndex;
     private int growCounter = 0;
 
-
+    //ivett
     public World() {
         vivos = Settings.list;
         buffervivos = new int[10];
@@ -46,6 +45,7 @@ public class World {
         inmovilList = null;
     }
 
+    //ivett
     public void update(float deltaTime) {
         if (gameOver) return;
         if (currentAnimal.getIsMoving() != 0) {
@@ -74,6 +74,7 @@ public class World {
         }
     }
 
+    //ivett
     private boolean growPlant() {
         if (growCounter++ < 9) return false;
         List<Pos> list = new ArrayList<>();
@@ -88,12 +89,12 @@ public class World {
         Random rand = new Random();
         int index = rand.nextInt(list.size());
         Pos pos = list.get(index);
-        Animal planta = new Animal(pos.getX(), pos.getY(), 2);
         mapa2[pos.getX()][pos.getY()] = 2;
         growCounter = 0;
         return true;
     }
 
+    //ivett
     public void updateMapa() {
         for (Animal a : vivos) {
             mapa[a.getX()][a.getY()] = a.getRefer();
@@ -103,17 +104,19 @@ public class World {
         }
     }
 
+    //ivett
     private void next() {
         nextIndex -= 1;
         if (nextIndex == -1) nextIndex = vivos.size() - 1;
         currentAnimal = vivos.get(nextIndex);
     }
 
+    //ivett
     private void relocate(int indexRemoved) {
         if (indexRemoved < vivos.indexOf(currentAnimal)) nextIndex--;
     }
 
-
+    //lis
     public void esAdyacente1(Animal a) {//es para facilitar el trabajo en el metodo alimentacion en una casilla
         if (a.getRefer() == 6) {
             esAdyacente2(a);
@@ -138,6 +141,7 @@ public class World {
         }
     }
 
+    //lis
     public void esAdyacente2(Animal a) {  //es para facilitar el trabajo en el metodo alimentacion en una casilla
         ArrayList<Pos> l = new ArrayList<>();
         for (int i = a.getX() - 2; i <= a.getX() + 2; i++) {//moverme por las filas del mapa
@@ -159,7 +163,7 @@ public class World {
         }
     }
 
-
+    //lis
     public boolean muere(Animal a) {
         boolean isDead = false;
         switch (a.getRefer()) {
@@ -187,6 +191,7 @@ public class World {
         return false;
     }
 
+    //lis
     public boolean reproduccion(Animal a) {
         switch (a.getRefer()) {
             case 3:
@@ -215,6 +220,7 @@ public class World {
         return false;
     }
 
+    //lis
     private boolean posicionHijo(Animal a) {
         ArrayList<Pos> l = new ArrayList<>();
         for (int i = a.getX() - 1; i <= a.getX() + 1; i++) {//moverme por las filas del mapa
@@ -239,6 +245,7 @@ public class World {
         return false;
     }
 
+    //ivett
     public int alimentacion(Animal a) {
         ArrayList<Pos> alimento = new ArrayList<>();
         for (int i = a.getX() - 1; i <= a.getX() + 1; i++) {//moverme por las filas del mapa
@@ -308,7 +315,7 @@ public class World {
 
     }
 
-
+    //ivett
     public void actualizarMapa(Pos p, Animal a) {
         mapa[a.getX()][a.getY()] = 0;
         mapa[p.getX()][p.getY()] = 0;
@@ -316,14 +323,13 @@ public class World {
         else a.move(p.getX(), p.getY());
     }
 
-
+    //ivett
     public Animal buscar(Pos p) {
         for (Animal e : vivos) {
             if (e.equals(p)) {
                 return e;
             }
         }
-
         return null;
 
     }

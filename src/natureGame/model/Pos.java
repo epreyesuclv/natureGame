@@ -6,6 +6,7 @@ package natureGame.model;
 
 import java.util.Objects;
 
+//lis
 public class Pos {
     private int x;
     private int y;

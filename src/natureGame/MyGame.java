@@ -68,6 +68,7 @@ public class MyGame extends Application implements Game {
         this.primaryStage = primaryStage;
         primaryStage.setWidth(1200);
         primaryStage.setHeight(700);
+        Settings.init();
         Settings.initDUMMYList();
         // MediaPlayer media = new MediaPlayer(new Media(new File("src/natureGame/Assets/test.mp3").toURI().toString()));
         //media.play();
