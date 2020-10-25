@@ -4,8 +4,6 @@ package natureGame.model;
  * guarda una posision y una referencia
  */
 
-import java.util.Objects;
-
 //lis
 public class Pos {
     private int x;
@@ -48,10 +46,5 @@ public class Pos {
         return x == pos.x &&
                 y == pos.y &&
                 refer == pos.refer;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(x, y, refer);
     }
 }

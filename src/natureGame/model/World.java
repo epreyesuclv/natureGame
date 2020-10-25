@@ -8,17 +8,16 @@ import java.util.Random;
 
 //lis y ivett
 public class World {
-    public List<Animal> vivos;
+    private List<Animal> vivos;
     public int[] buffervivos;
     public int[] buffermuertos;
     public int[] bufferTotal;
-    public List<Animal> muertos;
     public Animal currentAnimal;
     private List<Animal> inmovilList;
     private boolean gameOver = false;
     public int[][] mapa;
     public int[][] mapa2;
-    int nextIndex;
+    private int nextIndex;
     private int growCounter = 0;
 
     //ivett
@@ -30,7 +29,6 @@ public class World {
         mapa = new int[Settings.x][Settings.y];
         mapa2 = new int[Settings.x][Settings.y];
 
-        muertos = new ArrayList<>();
         inmovilList = Settings.inmoviles;
         currentAnimal = vivos.get(vivos.size() - 1);
         nextIndex = vivos.size() - 1;
@@ -95,7 +93,7 @@ public class World {
     }
 
     //ivett
-    public void updateMapa() {
+    private void updateMapa() {
         for (Animal a : vivos) {
             mapa[a.getX()][a.getY()] = a.getRefer();
         }
@@ -117,7 +115,7 @@ public class World {
     }
 
     //lis
-    public void esAdyacente1(Animal a) {//es para facilitar el trabajo en el metodo alimentacion en una casilla
+    private void esAdyacente1(Animal a) {//es para facilitar el trabajo en el metodo alimentacion en una casilla
         if (a.getRefer() == 6) {
             esAdyacente2(a);
             return;
@@ -128,7 +126,7 @@ public class World {
                 if (i >= 0 && i < mapa.length && j >= 0 && j < mapa[0].length) {
                     if (mapa[i][j] == 0 && mapa2[i][j] == 0) {//para encontrar un espacio vacio
                         l.add(new Pos(i, j, 0));
-                    } else if (mapa2[i][j] == 1 && (a.getRefer() == 5 || a.getRefer() == 6)) {
+                    } else if (mapa2[i][j] == 1 && a.getRefer() == 5) {
                         l.add(new Pos(i, j, 1));
                     }
                 }
@@ -142,15 +140,13 @@ public class World {
     }
 
     //lis
-    public void esAdyacente2(Animal a) {  //es para facilitar el trabajo en el metodo alimentacion en una casilla
+    private void esAdyacente2(Animal a) {  //es para facilitar el trabajo en el metodo alimentacion en una casilla
         ArrayList<Pos> l = new ArrayList<>();
         for (int i = a.getX() - 2; i <= a.getX() + 2; i++) {//moverme por las filas del mapa
             for (int j = a.getY() - 2; j <= a.getY() + 2; j++) //moverme por las columnas
                 if (i >= 0 && i < mapa.length && j >= 0 && j < mapa[0].length) {
-                    if (mapa[i][j] == 0 && mapa2[i][j] == 0) {//para encontrar un espacio vacio
+                    if (mapa[i][j] == 0 && mapa2[i][j] == 0 && mapa2[i][j] == 1) {//para encontrar un espacio vacio
                         l.add(new Pos(i, j, 0));
-                    } else if (mapa2[i][j] == 1 && (a.getRefer() == 5 || a.getRefer() == 6)) {
-                        l.add(new Pos(i, j, 1));
                     }
                 }
         }
@@ -164,10 +160,10 @@ public class World {
     }
 
     //lis
-    public boolean muere(Animal a) {
+    private boolean muere(Animal a) {
         boolean isDead = false;
         switch (a.getRefer()) {
-            case 3://conejo pasa 3 Utils sin comer
+            case 3://conejo pasa 2 turnos sin comer
                 if (a.contar() == 2)
                     isDead = true;
                 break;
@@ -185,14 +181,13 @@ public class World {
             mapa2[a.getX()][a.getY()] = 7;
             mapa[a.getX()][a.getY()] = 0;
             vivos.remove(a);
-            muertos.add(a);
             return true;
         }
         return false;
     }
 
     //lis
-    public boolean reproduccion(Animal a) {
+    private boolean reproduccion(Animal a) {
         switch (a.getRefer()) {
             case 3:
                 if (a.contadorDTurnos() == 2) {
@@ -246,7 +241,7 @@ public class World {
     }
 
     //ivett
-    public int alimentacion(Animal a) {
+    private int alimentacion(Animal a) {
         ArrayList<Pos> alimento = new ArrayList<>();
         for (int i = a.getX() - 1; i <= a.getX() + 1; i++) {//moverme por las filas del mapa
             for (int j = a.getY() - 1; j <= a.getY() + 1; j++) {
@@ -297,7 +292,6 @@ public class World {
                 mapa2[po.getX()][po.getY()] = 0;
                 if (po.getRefer() == 2) {
                     animal = new Animal(po.getX(), po.getY(), 2);
-                    muertos.add(animal);
                 }
             }
 
@@ -316,15 +310,15 @@ public class World {
     }
 
     //ivett
-    public void actualizarMapa(Pos p, Animal a) {
+    private void actualizarMapa(Pos p, Animal a) {
         mapa[a.getX()][a.getY()] = 0;
         mapa[p.getX()][p.getY()] = 0;
         if (a.getRefer() == 6) a.moveTwice(p.getX(), p.getY());
         else a.move(p.getX(), p.getY());
     }
 
-    //ivett
-    public Animal buscar(Pos p) {
+    //lis
+    private Animal buscar(Pos p) {
         for (Animal e : vivos) {
             if (e.equals(p)) {
                 return e;

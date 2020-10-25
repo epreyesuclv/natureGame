@@ -50,7 +50,7 @@ public class Animal extends Pos {
     }
 
     //se usa cuando el animal comienza a moverse a otra casilla,
-    // calcula la direccion en q debe moverse y la guarda en 'direccX' y 'direccy'
+    // calcula la direccion en q debe moverse y la guarda en 'direccX' y 'direccY'
     public boolean move(int dx, int dy) {
 
         if (getX() - dx > 0) {
@@ -68,7 +68,7 @@ public class Animal extends Pos {
         return keepMoving();
     }
 
-    //se usa cuando el animal esta en movimiento
+    //se usa para cambiar el estado de movimiento cuando el animal se esta moviendo
     public boolean keepMoving() {
         if (isMoving++ < 6) {
             return false;
