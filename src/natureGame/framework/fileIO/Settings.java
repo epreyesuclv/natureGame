@@ -13,7 +13,10 @@ import java.util.Random;
 public class Settings {
     private static final int NORMAL_BOUNDS = 60;
     private static final int ZOOM_BOUNDS = 90;
-    public static final int FPS = 500;
+    private static final int SLOW = 15;
+    private static final int FAST = 60;
+    private static final int NORMAL_SPEED = 30;
+    public static int FPS;
     public static int IMAGE_BOUNDS;
     public static int x = 0;
     public static int y = 0;
@@ -24,7 +27,8 @@ public class Settings {
     //inicia las listas por defecto
     public static void initDUMMYList() {
         IMAGE_BOUNDS = MINI_BOUNDS;
-        int[] cantidades = {0, 200, 300, 300, 200, 200, 200, 170, 170};
+        FPS = SLOW;
+        int[] cantidades = {0, 20, 20, 20, 20, 20, 20, 40, 40};
         x = cantidades[7];
         y = cantidades[8];
         int[][] map = new int[x][y];
@@ -68,4 +72,15 @@ public class Settings {
         IMAGE_BOUNDS = ZOOM_BOUNDS;
     }
 
+    public static void setSlow() {
+        FPS = SLOW;
+    }
+
+    public static void setfast() {
+        FPS = FAST;
+    }
+
+    public static void setNormalSpeed() {
+        FPS = NORMAL_SPEED;
+    }
 }

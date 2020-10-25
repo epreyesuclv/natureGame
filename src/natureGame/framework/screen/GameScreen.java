@@ -47,6 +47,7 @@ public class GameScreen extends Screen {
         myGame = game;
         world = new World();
         state = GameState.Running;
+
         game.changeSize(Settings.x * IMAGE_BOUNDS, Settings.y * IMAGE_BOUNDS);
         createMenu();
 
@@ -65,7 +66,9 @@ public class GameScreen extends Screen {
         statDeath = null;
         statTotal = null;
         statVivos = null;
-        game.setScreen(new MenuScreen((MyGame) game));
+        game.getGraphics().clear(0);
+        myGame.showMenu();
+
     }
 
     private void updatePause(float deltaTime) {
@@ -95,8 +98,8 @@ public class GameScreen extends Screen {
             }
         }
     }
-    //metodo q segun el estado en q este la simulacion actualiza los graficos de cierta manera
 
+    //metodo q segun el estado en q este la simulacion actualiza los graficos de cierta manera
     @Override
     public void present(float deltaTime) {
         if (state == GameState.Running) presentRunnig(deltaTime);
@@ -167,12 +170,16 @@ public class GameScreen extends Screen {
         if (world.currentAnimal.getDireccX() == 1) rigth = 3;
         animation = animationList[(world.currentAnimal.getIsMoving() % 3) + rigth];
 
-        g.drawPixmap(animation, world.currentAnimal.x, world.currentAnimal.y);
+        System.out.println("moving" + world.currentAnimal.getIsMoving());
+        System.out.println(world.currentAnimal.getX() + "xy" + world.currentAnimal.getY() + " " + (world.currentAnimal.getX() - (world.currentAnimal.getDireccX() * world.currentAnimal.getIsMoving()) * IMAGE_BOUNDS / 6));
+        int x = world.currentAnimal.getX() * IMAGE_BOUNDS - (world.currentAnimal.getDireccX() * (7 - world.currentAnimal.getIsMoving())) * IMAGE_BOUNDS / 6;
+        int y = world.currentAnimal.getY() * IMAGE_BOUNDS - (world.currentAnimal.getDireccY() * (7 - world.currentAnimal.getIsMoving())) * IMAGE_BOUNDS / 6;
+        g.drawPixmap(animation, x, y);
 
     }
 
     private void presentGameOver(float deltaTime) {
-        game.setScreen(new MenuScreen((MyGame) game));
+        myGame.showMenu();
     }
 
     //se crea el menu de opciones de la parte superior derecha con sus eventos click asociados

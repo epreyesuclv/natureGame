@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import natureGame.MyGame;
 import natureGame.framework.fileIO.Assets;
+import natureGame.framework.fileIO.Settings;
 
 import java.io.IOException;
 
@@ -40,7 +41,25 @@ public class Menu extends AnchorPane {
         miniScreen.setOnAction(e -> {
             myGame.changeScreen(2);
         });
+
+
+        MenuItem fast = new MenuItem("Fast");
+        fast.setOnAction(e -> {
+            Settings.setfast();
+        });
+        MenuItem normalSpeed = new MenuItem("Normal");
+        normalSpeed.setOnAction(e -> {
+            Settings.setNormalSpeed();
+        });
+
+        MenuItem slow = new MenuItem("slow");
+        slow.setOnAction(e -> {
+            Settings.setSlow();
+        });
+
+
         javafx.scene.control.Menu screen = new javafx.scene.control.Menu("Pantalla", null, zoomScreen, normalScreen, miniScreen);
+        javafx.scene.control.Menu fps = new javafx.scene.control.Menu("FPS", null, fast, normalSpeed, slow);
 //los demas botones y sus eventos click asosiados
         setWidth(1200);
         setHeight(720);
@@ -80,7 +99,7 @@ public class Menu extends AnchorPane {
         });
         getChildren().add(play);
         myGame.initDragg(this);
-        getChildren().add(new MenuBar(screen));
+        getChildren().add(new MenuBar(screen, fps));
 
     }
 
