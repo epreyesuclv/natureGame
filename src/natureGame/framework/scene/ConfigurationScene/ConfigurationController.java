@@ -1,25 +1,27 @@
 package natureGame.framework.scene.ConfigurationScene;
+/**
+ * Es la clase controladora del fxml configuration.fxml,
+ * se encargade gestionar los errores en los campos y de guardar las confuguraciones q el usuario defina
+ */
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import natureGame.MyGame;
-import natureGame.Util;
+import natureGame.framework.fileIO.Assets;
 import natureGame.framework.fileIO.Settings;
-import natureGame.framework.scene.ConfigurationScene.Dialogs.Chosser;
 import natureGame.framework.scene.ConfigurationScene.Dialogs.ErrorDialog;
 import natureGame.model.Animal;
 import org.controlsfx.control.ToggleSwitch;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import static natureGame.framework.fileIO.Settings.inmoviles;
@@ -28,15 +30,25 @@ public class ConfigurationController {
     private MyGame myGame;
 
     @FXML
-    public ToggleSwitch tswich;
+    private ToggleSwitch tswich;
     @FXML
-    public TextField textFieldpiedras, textFieldplantas, textFieldconejos, textFieldserpientes, textFieldlechuzas, textFieldbuitres, ancho, largo;
+    private TextField textFieldpiedras, textFieldplantas, textFieldconejos, textFieldserpientes, textFieldlechuzas, textFieldbuitres, ancho, largo;
     @FXML
-    public ImageView imageViewpiedra, imageViewplanta, imageViewconejo, imageViewserpiente, imageViewlechuza, imageViewbuitre;
+    private ImageView imageViewpiedra, imageViewplanta, imageViewconejo, imageViewserpiente, imageViewlechuza, imageViewbuitre;
+    @FXML
+    private ImageView imageViewAtras;
 
-    private double xOffset;
-    private double yOffset;
+    public void initialize() {
+        imageViewAtras.setImage(Assets.atras.getImage());
+        imageViewpiedra.setImage(Assets.piedra.getImage());
+        imageViewplanta.setImage(Assets.planta.getImage());
+        imageViewconejo.setImage(Assets.conejo.getImage());
+        imageViewserpiente.setImage(Assets.serpiente.getImage());
+        imageViewlechuza.setImage(Assets.lechuza.getImage());
+        imageViewbuitre.setImage(Assets.buitre.getImage());
+    }
 
+    //checkea si hay alguna campo mal
     private boolean check() throws IOException {
         TextField[] textFieldList = new TextField[]{null, textFieldpiedras, textFieldplantas, textFieldconejos, textFieldserpientes, textFieldlechuzas, textFieldbuitres, ancho, largo};
 
@@ -79,7 +91,7 @@ public class ConfigurationController {
 
     }
 
-
+    //gestiona el evento de la imagen "Atras" se encarga de salir de la pantalla de configuracion
     public void exit() throws IOException {
         if (tswich.isSelected()) {
             if (check())
@@ -91,6 +103,7 @@ public class ConfigurationController {
 
     }
 
+    //en caso de q el usuario halla guardado las configuraciones iniciales se guardan
     private void save(int[] cantidades) {
         Settings.x = cantidades[7];
         Settings.y = cantidades[8];
@@ -103,8 +116,14 @@ public class ConfigurationController {
                 int x = Math.abs(rand.nextInt() % Settings.x);
                 int y = Math.abs(rand.nextInt() % Settings.y);
                 while (map[x][y] != 0) {
-                    x = Math.abs(rand.nextInt() % Settings.x);
-                    y = Math.abs(rand.nextInt() % Settings.y);
+                    x++;
+                    if (x == Settings.x) {
+                        x = 0;
+                        y++;
+                    }
+                    if (y == Settings.y) {
+                        y = 0;
+                    }
                 }
                 if (i == 1 || i == 2)
                     Settings.inmoviles.add(new Animal(x, y, i));
@@ -117,6 +136,7 @@ public class ConfigurationController {
 
     }
 
+    //se encarga de llamar al ErrorDialog y bloaquear el Stage princiapal
     public void showError(String text) throws IOException {
         FXMLLoader loader = new FXMLLoader(MyGame.class.getResource("framework/scene/ConfigurationScene/Dialogs/errorDialog.fxml"));
         loader.load();
@@ -139,84 +159,8 @@ public class ConfigurationController {
         myGame.unblockStage();
     }
 
-
-    public void chosePlant() {
-        String planta = Util.sPlanta;
-        List<String> list = new ArrayList<>();
-        list.add(planta + "planta2");
-        list.add(planta + "planta3");
-        list.add(planta + "planta4");
-        list.add(planta + "planta5");
-        list.add(planta + "planta6");
-        Util.planta = showChosser(list, imageViewplanta);
-    }
-
-    public void chosePiedra() {
-        String planta = Util.sPiedra;
-        List<String> list = new ArrayList<>();
-        Util.piedra = showChosser(list, imageViewplanta);
-    }
-
-    public void choseConejo() {
-        String planta = Util.sConejo;
-        List<String> list = new ArrayList<>();
-        list.add(planta + "planta2");
-        list.add(planta + "planta3");
-        list.add(planta + "planta4");
-        list.add(planta + "planta5");
-        list.add(planta + "planta6");
-        Util.conejo = showChosser(list, imageViewplanta);
-    }
-
-    public void choseSerpiente() {
-        String planta = Util.sPlanta;
-        List<String> list = new ArrayList<>();
-        list.add(planta + "planta2");
-        list.add(planta + "planta3");
-        list.add(planta + "planta4");
-        list.add(planta + "planta5");
-        list.add(planta + "planta6");
-        Util.serpiente = showChosser(list, imageViewplanta);
-    }
-
-    public void choseLechuza() {
-        String planta = Util.sLechuza;
-        List<String> list = new ArrayList<>();
-        list.add(planta + "planta2");
-        list.add(planta + "planta3");
-        list.add(planta + "planta4");
-        list.add(planta + "planta5");
-        list.add(planta + "planta6");
-        Util.lechuza = showChosser(list, imageViewplanta);
-    }
-
-    public void choseBuitre() {
-        String planta = Util.sBuitre;
-        List<String> list = new ArrayList<>();
-        list.add(planta + "planta2");
-        list.add(planta + "planta3");
-        list.add(planta + "planta4");
-        list.add(planta + "planta5");
-        list.add(planta + "planta6");
-        Util.buitre = showChosser(list, imageViewplanta);
-    }
-
-    public Image showChosser(List<String> list, ImageView view) {
-        Chosser chosser = new Chosser(list, view);
-        Scene scene = new Scene(chosser);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner(myGame.getPrimaryStage());
-        chosser.setStage(stage);
-        myGame.blockStage();
-        stage.showAndWait();
-        myGame.unblockStage();
-        return view.getImage();
-    }
-
-    public void setMyGame(MyGame myGame) {
+    //
+    public void setMyGame(MyGame myGame, Parent root) {
         this.myGame = myGame;
     }
 }

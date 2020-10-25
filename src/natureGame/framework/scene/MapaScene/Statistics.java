@@ -1,4 +1,9 @@
 package natureGame.framework.scene.MapaScene;
+/**
+ * es la clase controladora de el fxml pieChart.fxml,
+ * se encarga de mostrar las estadisticas que el usuario halla pulsado
+ */
+
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,6 +37,7 @@ public class Statistics {
         this.list.addAll("Plantas", "Conejos", "Serpientes", "Lechuza", "Buitre");
     }
 
+    //actualiza los datos de los animales en la grafica
     public void updateElement(int[] buffer) {
         if (firstTime) {
             firstTime = false;

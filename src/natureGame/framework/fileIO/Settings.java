@@ -6,20 +6,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * clase q cambia las configuraciones de la aplicacion
+ */
+
 public class Settings {
     private static final int NORMAL_BOUNDS = 60;
     private static final int ZOOM_BOUNDS = 90;
-    private static final int MINI_BOUNDS = 42;
+    public static final int FPS = 500;
     public static int IMAGE_BOUNDS;
     public static int x = 0;
     public static int y = 0;
-    public static List<Animal> list = new ArrayList<>(20);
-    public static List<Animal> inmoviles = new ArrayList<>(20);
-    public static final int FPS = 200;
+    public static List<Animal> list = new ArrayList<>(20);//lista inicial de animales
+    public static List<Animal> inmoviles = new ArrayList<>(20);//lista inicial de objetos inmoviles
+    private static final int MINI_BOUNDS = 30;
 
+    //inicia las listas por defecto
     public static void initDUMMYList() {
         IMAGE_BOUNDS = MINI_BOUNDS;
-        int[] cantidades = {0, 20, 30, 30, 20, 20, 20, 40, 40};
+        int[] cantidades = {0, 200, 300, 300, 200, 200, 200, 170, 170};
         x = cantidades[7];
         y = cantidades[8];
         int[][] map = new int[x][y];
@@ -29,9 +34,15 @@ public class Settings {
                 int xx = Math.abs(rand.nextInt() % x);
                 int yy = Math.abs(rand.nextInt() % y);
                 while (map[xx][yy] != 0) {
-                    xx = Math.abs(rand.nextInt() % x);
-                    yy = Math.abs(rand.nextInt() % y);
+                    xx++;
+                    if (xx == x) {
+                        xx = 0;
+                        yy++;
+                    }
+                    if (yy == y)
+                        yy = 0;
                 }
+
                 if (i == 1 || i == 2)
                     inmoviles.add(new Animal(xx, yy, i));
                 else {
@@ -42,7 +53,9 @@ public class Settings {
 
     }
 
-
+    /**
+     * usado para cambiar el tamanho de las casillas
+     **/
     public static void setMini() {
         IMAGE_BOUNDS = MINI_BOUNDS;
     }

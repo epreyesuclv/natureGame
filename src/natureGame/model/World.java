@@ -13,7 +13,7 @@ public class World {
     public int[] bufferTotal;
     public List<Animal> muertos;
     public Animal currentAnimal;
-    List<Animal> inmovilList;
+    private List<Animal> inmovilList;
     private boolean gameOver = false;
     //  float tickTime = 0;
     // float tick = 2.0f;
@@ -43,11 +43,12 @@ public class World {
             buffervivos[inmovilList.get(i).getRefer()]++;
         }
         updateMapa();
+        inmovilList = null;
     }
 
     public void update(float deltaTime) {
         if (gameOver) return;
-        if (currentAnimal.isMoving != 0) {
+        if (currentAnimal.getIsMoving() != 0) {
             if (currentAnimal.keepMoving()) {
                 mapa[currentAnimal.getX()][currentAnimal.getY()] = currentAnimal.getRefer();
                 next();
@@ -74,7 +75,7 @@ public class World {
     }
 
     private boolean growPlant() {
-        if (growCounter++ < 7) return false;
+        if (growCounter++ < 9) return false;
         List<Pos> list = new ArrayList<>();
         for (int i = 0; i < Settings.x; i++)
             for (int j = 0; j < Settings.y; j++) {
@@ -89,7 +90,6 @@ public class World {
         Pos pos = list.get(index);
         Animal planta = new Animal(pos.getX(), pos.getY(), 2);
         mapa2[pos.getX()][pos.getY()] = 2;
-        inmovilList.add(planta);
         growCounter = 0;
         return true;
     }
@@ -288,7 +288,6 @@ public class World {
 
             if (a.getRefer() == 3 || a.getRefer() == 6) {
                 mapa2[po.getX()][po.getY()] = 0;
-                inmovilList.remove(buscarI(po));
                 if (po.getRefer() == 2) {
                     animal = new Animal(po.getX(), po.getY(), 2);
                     muertos.add(animal);
@@ -331,14 +330,5 @@ public class World {
 
     }
 
-    public Animal buscarI(Pos p) {
-        for (Animal e : inmovilList) {
-            if (e.equals(p)) {
-                return e;
-            }
-
-        }
-        return null;
-    }
 }
 

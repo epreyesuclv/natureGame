@@ -10,7 +10,11 @@ import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 
-
+/**
+ * Es la clase controladora de el fxml errorDialog.fxml,
+ * se encarga de mostrar un cuadro de dialogo en caso de q algunos campos en la pantalla de
+ * configuraciones esten mal
+ */
 public class ErrorDialog {
     @FXML
     Label text;

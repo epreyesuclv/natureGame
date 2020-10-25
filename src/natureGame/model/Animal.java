@@ -1,25 +1,30 @@
 package natureGame.model;
 
-import javafx.scene.image.Image;
-import natureGame.Util;
 import natureGame.framework.fileIO.Settings;
 
-import java.util.List;
-
+/**
+ * esta clase es utilizada para representar un elemento movil en la naturaleza
+ **/
 public class Animal extends Pos {
-    boolean twice = false;
-    int dx;
-    int dy;
+    /**
+     * estos atributos son especificos para los buitres
+     **/
+    private boolean twice = false;//es usado para saber si se tiene q mover dos casillas
+    private int dx;
+    private int dy;
+    /**
+     * atributos basicos de todos lo elementos moviles del sitema
+     **/
     private int vida;//veces q no se ha alimentado
     private int reproduccionCounter;
-    private boolean b;
-    int isMoving;
+
+    private int isMoving;
     private int direccX;
     private int direccY;
     public int x;//posicion en metapixeles; 1 metapixel = 90/6 pixeles
     public int y;//posicion en metapixeles; 1 metapixel = 90/6 pixeles
 
-
+    //constructor
     public Animal(int x, int y, int refer) {
         super(x, y, refer);
         vida = 0;
@@ -29,25 +34,28 @@ public class Animal extends Pos {
         this.y = getY() * Settings.IMAGE_BOUNDS;
     }
 
-
+    //se usa en el metodo de "alimentacion" n la clase World para saber cuando debe morir el animal
     public int contar() {
         return vida++;
     }
 
-
+    //se usa en el metodo de "alimentacion",se dispara cuando el animal se alimenta
     public void seAlimento() {
         vida = 0;
     }
 
-
+    //para saber cuando debe reproducirce el animal
     public int contadorDTurnos() {
         return ++reproduccionCounter;
     }
 
+    //se dispara cuando el animal se reproduce
     public void reset() {
         reproduccionCounter = 0;
     }
 
+    //se usa cuando el animal comienza a moverse a otra casilla,
+    // calcula la direccion en q debe moverse y la guarda en 'direccX' y 'direccy'
     public boolean move(int dx, int dy) {
 
         if (getX() - dx > 0) {
@@ -63,6 +71,7 @@ public class Animal extends Pos {
         return keepMoving();
     }
 
+    //se usa cuando el animal esta en movimiento,calcula la posicion esacta en pixeles en q debe estar el animal
     public boolean keepMoving() {
 
         if (isMoving++ < 6) {
@@ -82,7 +91,7 @@ public class Animal extends Pos {
         }
     }
 
-
+    //si el animal se tiene q mover dos pasos se usa este metodo
     public void moveTwice(int dx, int dy) {
         twice = true;
         this.dx = dx;
@@ -90,10 +99,12 @@ public class Animal extends Pos {
         move(dx, dy);
     }
 
+    //devuelve la variable isMoving,es usado para hacer las animaciones
     public int getIsMoving() {
         return isMoving;
     }
 
+    //devuelve la variable direccX,es usado para hacer las animaciones
     public int getDireccX() {
         return direccX;
     }

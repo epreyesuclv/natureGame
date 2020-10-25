@@ -16,28 +16,29 @@ import natureGame.framework.fileIO.Settings;
 import natureGame.framework.game.Game;
 import natureGame.framework.graphics.Graphics;
 import natureGame.framework.graphics.MyGraphics;
+import natureGame.framework.graphics.MyRoot;
 import natureGame.framework.graphics.Render;
-import natureGame.framework.input.Input;
-import natureGame.framework.input.MyInput;
 import natureGame.framework.scene.ConfigurationScene.ConfigurationController;
 import natureGame.framework.scene.MapaScene.MyScroll;
 import natureGame.framework.scene.MenuScene.Menu;
 import natureGame.framework.screen.GameScreen;
 import natureGame.framework.screen.LoadingScreen;
 import natureGame.framework.screen.Screen;
-import natureGame.model.Animal;
 
 import java.io.IOException;
-import java.util.List;
 
+/**
+ * clase principal, donde se implementan la interface Game del framework utilizado en la aplicacion
+ * aqui tambien se encuentra el hilo principal de javafx
+ */
 public class MyGame extends Application implements Game {
 
 
     private static AnchorPane anchor;
+    private static MyRoot root;
     Graphics graphics;
     Audio audio;
     FileIO fileIO;
-    Input input;
     Screen screen;
     Render render;
     Canvas canvas;
@@ -47,8 +48,21 @@ public class MyGame extends Application implements Game {
     private Scene configuration = null;
     private double xOffset;
     private double yOffset;
+
+    public static AnchorPane getRoot() {
+        return root;
+    }
+
+
     private static Stage primaryStage;
 
+    //devuelve el Stage principal
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+
+    }
+
+    //hilo principal de javafx
     @Override
     public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
@@ -58,12 +72,13 @@ public class MyGame extends Application implements Game {
         // MediaPlayer media = new MediaPlayer(new Media(new File("src/natureGame/Assets/test.mp3").toURI().toString()));
         //media.play();
         primaryStage.initStyle(StageStyle.TRANSPARENT);
-        loadMenuImges();
+        loadMenuImages();
         showMenu();
         primaryStage.show();
     }
 
-    private void loadMenuImges() {
+    //carga las imagenes de la primera pantalla
+    private void loadMenuImages() {
         Graphics g = getGraphics();
         Assets.fondoCaricatura = g.newPixmap("natureGame/Assets/Images/Otros/FondoCaricatura.jpg", 1200, 720);
         Assets.fondoDia = g.newPixmap("natureGame/Assets/Images/Otros/fondoDia.jpg", 1200, 720);
@@ -74,49 +89,61 @@ public class MyGame extends Application implements Game {
         Assets.gamepad = g.newPixmap("natureGame/Assets/Images/Otros/gamepadrosa.png", 90, 90);
         Assets.fondoActual = g.newPixmap("natureGame/Assets/Images/Otros/fondonew.jpg", 1200, 720);
 
+        Assets.piedra = g.newPixmap("natureGame/Assets/Images/Resources/Piedra/piedra4.png", 0);
+        Assets.planta = g.newPixmap("natureGame/Assets/Images/Resources/Planta/elmejor.png", 0);
+        Assets.conejo = g.newPixmap("natureGame/Assets/Images/Resources/Conejo/Conejo1.png", 0);
+        Assets.serpiente = g.newPixmap("natureGame/Assets/Images/Resources/Serpiente/serpiente1.png", 0);
+        Assets.lechuza = g.newPixmap("natureGame/Assets/Images/Resources/Hedwig/lechuza1.png", 0);
+        Assets.buitre = g.newPixmap("natureGame/Assets/Images/Resources/Buitre/buitre1.png", 0);
+
+
     }
 
+    //ejecuta la clase q carga las imagenes de los elementos
     public void load() {
         screen = getStartScreen();
         screen.update(0);
+
+        primaryStage.show();
     }
 
+    //metodo q se ejecuta antes de start por el hilo de javafx
     @Override
     public void init() throws Exception {
         canvas = new Canvas(1200, 700);
         fileIO = new MyFileIO(this);
         render = new Render(this, canvas);
         anchor = render.anchor;
+        root = new MyRoot(1200, 700);
         MyScroll scroll = new MyScroll();
         scroll.setContent(anchor);
-        input = new MyInput(anchor, 1, 1);
+        root.getChildren().add(scroll);
         graphics = new MyGraphics(canvas, this);
-        gameScene = new Scene(scroll);
+        gameScene = new Scene(root);
         initDragg(anchor);
     }
 
-    public static Stage getPrimaryStage() {
-        return primaryStage;
-
-    }
-
+    //muestra la pantalla de menu
     public void showMenu() {
         Menu m = new Menu(this, canvas);
         menu = new Scene(m);
         primaryStage.setScene(menu);
     }
 
+    //muestra la pantalla de configuraciones
     public void showConfiguration() throws IOException {
         FXMLLoader loader = new FXMLLoader(MyGame.class.getResource("framework/scene/ConfigurationScene/configuration.fxml"));
         loader.load();
         Parent root = loader.getRoot();
         ConfigurationController controller = loader.getController();
         configuration = new Scene(root);
-        controller.setMyGame(this);
+        controller.setMyGame(this, root);
+        initDragg(root);
         primaryStage.setScene(configuration);
 
     }
 
+    //es usado para q la pantalla se pueda  arrastrar desde cualkier lugar
     public void initDragg(Parent p) {
         p.setOnMousePressed(event -> {
             xOffset = event.getSceneX();
@@ -129,26 +156,24 @@ public class MyGame extends Application implements Game {
 
     }
 
-
+    //hilo principal
     public static void main(String[] args) {
         launch(args);
     }
 
-    public List<Animal> getList() {
-        return Util.initList;
-    }
 
+    //bloquea la Stage principal
     public void blockStage() {
         primaryStage.getScene().getRoot().setDisable(true);
     }
 
+    //desbloquea la Stage principal
     public void unblockStage() {
         primaryStage.getScene().getRoot().setDisable(false);
     }
 
-    @Override
-    public Graphics getGraphics() {
-        return graphics;
+    public Scene getConfiguration() {
+        return configuration;
     }
 
     @Override
@@ -159,11 +184,6 @@ public class MyGame extends Application implements Game {
     @Override
     public FileIO getFileIO() {
         return fileIO;
-    }
-
-    @Override
-    public Input getInput() {
-        return input;
     }
 
     @Override
@@ -184,8 +204,10 @@ public class MyGame extends Application implements Game {
         return screen;
     }
 
-    public Screen getStartScreen() {
-        return new LoadingScreen(this);
+    //lo siguiente son las implementaciones de de los metodos de la clase abstracta Game
+    @Override
+    public Graphics getGraphics() {
+        return graphics;
     }
 
 
@@ -195,18 +217,19 @@ public class MyGame extends Application implements Game {
 
     }
 
-    public static AnchorPane getRoot() {
-        return anchor;
+    public Screen getStartScreen() {
+        return new LoadingScreen(this);
     }
 
+    //comienza la simulacion
     public void startRendering() {
         primaryStage.setScene(gameScene);
         setScreen(new GameScreen(this));
         render.resume();
-
     }
 
-    public void changeBacground(int i) {
+    //cambia el fondo del menu
+    public void changeBackground(int i) {
         switch (i) {
             case 0:
                 Assets.fondoActual = Assets.fondoDia;
@@ -223,6 +246,7 @@ public class MyGame extends Application implements Game {
 
     }
 
+    //cambia el tamahno de las casillas en la simulacion
     public void changeScreen(int i) {
         switch (i) {
             case 0:
@@ -238,5 +262,4 @@ public class MyGame extends Application implements Game {
                 load();
         }
     }
-
 }

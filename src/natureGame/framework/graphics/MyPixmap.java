@@ -1,9 +1,12 @@
 package natureGame.framework.graphics;
+/**
+ * clase q gestiona las propiedades de una imagen,se hizo por conveniencia
+ */
 
 import javafx.scene.image.Image;
 
 public class MyPixmap implements Pixmap {
-   public Image image;
+    public Image image;
 
 
     public MyPixmap(Image image) {

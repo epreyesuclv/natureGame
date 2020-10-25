@@ -1,73 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.ToggleSwitch?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="683.0" prefWidth="998.0" xmlns="http://javafx.com/javafx/8.0.241"
+            fx:controller="natureGame.framework.scene.ConfigurationScene.ConfigurationController">
+    <children>
+        <ImageView fx:id="imageViewpiedra" fitHeight="65.0" fitWidth="65.0" layoutX="36.0" layoutY="29.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <image>
+            </image>
+        </ImageView>
+        <ImageView fx:id="imageViewplanta" fitHeight="65.0" fitWidth="65.0" layoutX="36.0" layoutY="101.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <image>
+            </image>
+        </ImageView>
+        <ImageView fx:id="imageViewconejo" fitHeight="65.0" fitWidth="65.0" layoutX="36.0" layoutY="181.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <image>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/8.0.241" xmlns:fx="http://javafx.com/fxml/1" fx:controller="natureGame.framework.scene.ConfigurationScene.ConfigurationController">
-   <children>
-      <ImageView fitHeight="65.0" fitWidth="65.0" layoutX="696.0" layoutY="14.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../Assets/Images/Otros/atras.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="imageViewpiedra" fitHeight="65.0" fitWidth="65.0" layoutX="36.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../Assets/Images/Resources/Piedra/piedra1.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="imageViewplanta" fitHeight="65.0" fitWidth="65.0" layoutX="36.0" layoutY="101.0" onMouseClicked="#chosePlant" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../Assets/Images/Resources/Planta/planta2.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="imageViewconejo" fitHeight="65.0" fitWidth="65.0" layoutX="36.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../Assets/Images/Resources/Conejo/conejo2.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="imageViewserpiente" fitHeight="65.0" fitWidth="65.0" layoutX="36.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../Assets/Images/Resources/Serpiente/serpiente4.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="imageViewlechuza" fitHeight="65.0" fitWidth="65.0" layoutX="36.0" layoutY="336.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../Assets/Images/Resources/Hedwig/hedwig1.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="imageViewbuitre" fitHeight="65.0" fitWidth="65.0" layoutX="26.0" layoutY="401.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../Assets/Images/Resources/Buitre/buitre1.png" />
-         </image>
-      </ImageView>
-      <TextField fx:id="textFieldpiedras" layoutX="144.0" layoutY="49.0" prefHeight="25.0" prefWidth="48.0" />
-      <TextField fx:id="textFieldplantas" layoutX="144.0" layoutY="121.0" prefHeight="25.0" prefWidth="48.0" />
-      <TextField fx:id="textFieldconejos" layoutX="144.0" layoutY="201.0" prefHeight="25.0" prefWidth="48.0" />
-      <TextField fx:id="textFieldserpientes" layoutX="144.0" layoutY="281.0" prefHeight="25.0" prefWidth="48.0" />
-      <TextField fx:id="textFieldlechuzas" layoutX="144.0" layoutY="356.0" prefHeight="25.0" prefWidth="48.0" />
-      <TextField fx:id="textFieldbuitres" layoutX="144.0" layoutY="421.0" prefHeight="25.0" prefWidth="48.0" />
-      <ToggleSwitch fx:id="tswich" layoutX="681.0" layoutY="527.0" prefHeight="25.0" prefWidth="40.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </ToggleSwitch>
-      <Label layoutX="681.0" layoutY="506.0" prefHeight="17.0" prefWidth="48.0" text="Guardar" />
-      <Label layoutX="287.0" layoutY="46.0" prefHeight="32.0" prefWidth="87.0" text="Ancho">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="287.0" layoutY="85.0" prefHeight="32.0" prefWidth="87.0" text="Largo">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <TextField fx:id="ancho" layoutX="381.0" layoutY="50.0" prefHeight="23.0" prefWidth="48.0" />
-      <TextField fx:id="largo" layoutX="381.0" layoutY="90.0" prefHeight="23.0" prefWidth="48.0" />
-   </children>
+            </image>
+        </ImageView>
+        <ImageView fx:id="imageViewserpiente" fitHeight="65.0" fitWidth="65.0" layoutX="36.0" layoutY="261.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <image>
+
+            </image>
+        </ImageView>
+        <ImageView fx:id="imageViewlechuza" fitHeight="65.0" fitWidth="65.0" layoutX="36.0" layoutY="336.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <image>
+            </image>
+        </ImageView>
+        <ImageView fx:id="imageViewbuitre" fitHeight="65.0" fitWidth="65.0" layoutX="26.0" layoutY="401.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <image>
+            </image>
+        </ImageView>
+        <TextField fx:id="textFieldpiedras" layoutX="144.0" layoutY="49.0" prefHeight="25.0" prefWidth="48.0"/>
+        <TextField fx:id="textFieldplantas" layoutX="144.0" layoutY="121.0" prefHeight="25.0" prefWidth="48.0"/>
+        <TextField fx:id="textFieldconejos" layoutX="144.0" layoutY="201.0" prefHeight="25.0" prefWidth="48.0"/>
+        <TextField fx:id="textFieldserpientes" layoutX="144.0" layoutY="281.0" prefHeight="25.0" prefWidth="48.0"/>
+        <TextField fx:id="textFieldlechuzas" layoutX="144.0" layoutY="356.0" prefHeight="25.0" prefWidth="48.0"/>
+        <TextField fx:id="textFieldbuitres" layoutX="144.0" layoutY="421.0" prefHeight="25.0" prefWidth="48.0"/>
+        <ToggleSwitch fx:id="tswich" layoutX="899.0" layoutY="592.0" prefHeight="25.0" prefWidth="40.0">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </ToggleSwitch>
+        <Label layoutX="899.0" layoutY="575.0" prefHeight="17.0" prefWidth="48.0" text="Guardar"/>
+        <Label layoutX="287.0" layoutY="46.0" prefHeight="32.0" prefWidth="87.0" text="Ancho">
+            <font>
+                <Font size="24.0"/>
+            </font>
+        </Label>
+        <Label layoutX="287.0" layoutY="85.0" prefHeight="32.0" prefWidth="87.0" text="Largo">
+            <font>
+                <Font size="24.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="ancho" layoutX="381.0" layoutY="50.0" prefHeight="23.0" prefWidth="48.0"/>
+        <TextField fx:id="largo" layoutX="381.0" layoutY="90.0" prefHeight="23.0" prefWidth="48.0"/>
+        <ImageView fx:id="imageViewAtras" fitHeight="72.0" fitWidth="76.0" layoutX="885.0" layoutY="42.0"
+                   onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true"/>
+    </children>
 </AnchorPane>

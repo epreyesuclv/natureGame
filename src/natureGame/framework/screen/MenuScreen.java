@@ -1,4 +1,8 @@
 package natureGame.framework.screen;
+/**
+ * se utiliza para enlazar la pantalla de menu con la pantalla de simulacion
+ * y q no sufra un cambio brusco
+ */
 
 import natureGame.MyGame;
 

@@ -1,12 +1,14 @@
 package natureGame.framework.game;
 
 
-import natureGame.framework.graphics.Graphics;
 import natureGame.framework.audio.Audio;
 import natureGame.framework.fileIO.FileIO;
-import natureGame.framework.input.Input;
+import natureGame.framework.graphics.Graphics;
 import natureGame.framework.screen.Screen;
 
+/**
+ * interface principal del framework
+ **/
 public interface Game {
     Graphics getGraphics();
 
@@ -14,11 +16,10 @@ public interface Game {
 
     FileIO getFileIO();
 
-    Input getInput();
-
     void setScreen(Screen screen);
 
     Screen getCurrentScreen();
 
+    //cambia el tamanho
     void changeSize(int x, int y);
 }

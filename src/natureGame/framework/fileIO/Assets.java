@@ -2,6 +2,9 @@ package natureGame.framework.fileIO;
 
 import natureGame.framework.graphics.Pixmap;
 
+/**
+ * clase q guarda las imagenes en tipos de datos Pixmap para facilitar su uso
+ **/
 public class Assets {
 
     public static Pixmap atras;
@@ -53,6 +56,7 @@ public class Assets {
     public static Pixmap sfx_off;
     public static Pixmap fondoActual;
 
+    //carga las listas de animaciones de cada animal
     public static void load() {
         buitres = new Pixmap[]{buitre, buitre2, buitre3, buitre4, buitre5, buitre6};
         conejos = new Pixmap[]{conejo, conejo2, conejo3, conejo4, conejo5, conejo6};
