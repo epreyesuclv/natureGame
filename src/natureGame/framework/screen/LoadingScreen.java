@@ -5,13 +5,11 @@ package natureGame.framework.screen;
 
 import natureGame.MyGame;
 import natureGame.framework.fileIO.Assets;
-import natureGame.framework.game.Game;
 import natureGame.framework.graphics.Graphics;
 
 public class LoadingScreen extends Screen {
-    public LoadingScreen(Game game) {
+    public LoadingScreen(MyGame game) {
         super(game);
-
     }
 
     @Override
@@ -20,6 +18,13 @@ public class LoadingScreen extends Screen {
         Assets.terreno = g.newPixmap("natureGame/Assets/Images/Resources/Terreno/cesped.png", 0);
         Assets.huesos = g.newPixmap("natureGame/Assets/Images/Resources/Huesos/huesos.png", 0);
         Assets.pieChart = g.newPixmap("natureGame/Assets/Images/Otros/pie-chart.jpg", 0);
+
+        Assets.piedra = g.newPixmap("natureGame/Assets/Images/Resources/Piedra/piedra4.png", 0);
+        Assets.planta = g.newPixmap("natureGame/Assets/Images/Resources/Planta/elmejor.png", 0);
+        Assets.conejo = g.newPixmap("natureGame/Assets/Images/Resources/Conejo/Conejo1.png", 0);
+        Assets.serpiente = g.newPixmap("natureGame/Assets/Images/Resources/Serpiente/serpiente1.png", 0);
+        Assets.lechuza = g.newPixmap("natureGame/Assets/Images/Resources/Hedwig/lechuza1.png", 0);
+        Assets.buitre = g.newPixmap("natureGame/Assets/Images/Resources/Buitre/buitre1.png", 0);
 
         Assets.conejo2 = g.newPixmap("natureGame/Assets/Images/Resources/Conejo/Conejo2.png", 0);
         Assets.conejo3 = g.newPixmap("natureGame/Assets/Images/Resources/Conejo/conejo8.png", 0);
@@ -46,7 +51,7 @@ public class LoadingScreen extends Screen {
         Assets.buitre6 = g.newPixmap("natureGame/Assets/Images/Resources/Buitre/buitre6.png", 0);
 
         Assets.load();
-        game.setScreen(new MenuScreen((MyGame) game));
+        ((MyGame) game).showMenu();
     }
 
     @Override

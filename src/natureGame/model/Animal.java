@@ -1,7 +1,5 @@
 package natureGame.model;
 
-import natureGame.framework.fileIO.Settings;
-
 /**
  * esta clase es utilizada para representar un elemento movil en la naturaleza
  **/
@@ -30,8 +28,6 @@ public class Animal extends Pos {
         vida = 0;
         reproduccionCounter = 0;
         isMoving = 0;
-        this.x = getX() * Settings.IMAGE_BOUNDS;
-        this.y = getY() * Settings.IMAGE_BOUNDS;
     }
 
     //se usa en el metodo de "alimentacion" n la clase World para saber cuando debe morir el animal
@@ -68,25 +64,25 @@ public class Animal extends Pos {
         } else if (getY() - dy < 0) {
             direccY = 1;
         } else direccY = 0;
+        setX(getX() + direccX);
+        setY(getY() + direccY);
         return keepMoving();
     }
 
-    //se usa cuando el animal esta en movimiento,calcula la posicion esacta en pixeles en q debe estar el animal
+    //se usa cuando el animal esta en movimiento
     public boolean keepMoving() {
-
         if (isMoving++ < 6) {
-            x += direccX * Settings.IMAGE_BOUNDS / 6;
-            y += direccY * Settings.IMAGE_BOUNDS / 6;
             return false;
         } else {
-            super.setX(x / Settings.IMAGE_BOUNDS);
-            super.setY(y / Settings.IMAGE_BOUNDS);
             isMoving = 0;
             if (twice) {
                 twice = false;
                 if (dx == getX() && dy == getY()) return true;
                 return move(dx, dy);
             }
+            System.out.println(isMoving);
+            direccY = 0;
+            direccX = 0;
             return true;
         }
     }
@@ -107,6 +103,10 @@ public class Animal extends Pos {
     //devuelve la variable direccX,es usado para hacer las animaciones
     public int getDireccX() {
         return direccX;
+    }
+
+    public int getDireccY() {
+        return direccY;
     }
 }
 

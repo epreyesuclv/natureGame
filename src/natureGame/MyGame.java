@@ -125,6 +125,7 @@ public class MyGame extends Application implements Game {
 
     //muestra la pantalla de menu
     public void showMenu() {
+        stopRender();
         Menu m = new Menu(this, canvas);
         menu = new Scene(m);
         primaryStage.setScene(menu);
@@ -226,6 +227,10 @@ public class MyGame extends Application implements Game {
         primaryStage.setScene(gameScene);
         setScreen(new GameScreen(this));
         render.resume();
+    }
+
+    public void stopRender() {
+        render.pause();
     }
 
     //cambia el fondo del menu

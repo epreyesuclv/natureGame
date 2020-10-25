@@ -9,6 +9,7 @@ import java.util.Objects;
 public class Pos {
     private int x;
     private int y;
+    private int refer;
 
     public Pos(int x, int y, int refer) {
         this.x = x;
@@ -40,7 +41,6 @@ public class Pos {
         this.refer = refer;
     }
 
-    private int refer;
 
     public boolean equals(Pos o) {
         Pos pos = o;
