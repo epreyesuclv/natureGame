@@ -31,6 +31,7 @@ import java.io.IOException;
  * clase principal, donde se implementan la interface Game del framework utilizado en la aplicacion
  * aqui tambien se encuentra el hilo principal de javafx
  */
+//elieser
 public class MyGame extends Application implements Game {
 
 

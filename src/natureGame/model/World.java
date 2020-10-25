@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-//ivett
+//lis y ivett
 public class World {
     public List<Animal> vivos;
     public int[] buffervivos;
