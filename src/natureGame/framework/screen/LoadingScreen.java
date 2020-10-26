@@ -6,6 +6,7 @@ package natureGame.framework.screen;
 import natureGame.MyGame;
 import natureGame.framework.fileIO.Assets;
 import natureGame.framework.graphics.Graphics;
+
 //lary
 public class LoadingScreen extends Screen {
     public LoadingScreen(MyGame game) {
@@ -18,6 +19,9 @@ public class LoadingScreen extends Screen {
         Assets.terreno = g.newPixmap("natureGame/Assets/Images/Resources/Terreno/cesped.png", 0);
         Assets.huesos = g.newPixmap("natureGame/Assets/Images/Resources/Huesos/huesos.png", 0);
         Assets.pieChart = g.newPixmap("natureGame/Assets/Images/Otros/pie-chart.jpg", 0);
+
+        Assets.music_on = g.newPixmap("natureGame/Assets/Images/Otros/music_on.png", 30, 30);
+        Assets.music_off = g.newPixmap("natureGame/Assets/Images/Otros/music_off.png", 30, 30);
 
         Assets.piedra = g.newPixmap("natureGame/Assets/Images/Resources/Piedra/piedra4.png", 0);
         Assets.planta = g.newPixmap("natureGame/Assets/Images/Resources/Planta/elmejor.png", 0);

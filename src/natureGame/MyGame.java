@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import natureGame.framework.audio.Audio;
+import natureGame.framework.audio.MyAudio;
 import natureGame.framework.fileIO.Assets;
 import natureGame.framework.fileIO.FileIO;
 import natureGame.framework.fileIO.MyFileIO;
@@ -67,8 +68,6 @@ public class MyGame extends Application implements Game {
         primaryStage.setHeight(700);
         Settings.init();
         Settings.initDUMMYList();
-        // MediaPlayer media = new MediaPlayer(new Media(new File("src/natureGame/Assets/test.mp3").toURI().toString()));
-        //media.play();
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         loadMenuImages();
         showMenu();
@@ -108,6 +107,7 @@ public class MyGame extends Application implements Game {
     //metodo q se ejecuta antes de start por el hilo de javafx
     @Override
     public void init() throws Exception {
+        audio = new MyAudio();
         canvas = new Canvas(1200, 700);
         fileIO = new MyFileIO(this);
         render = new Render(this, canvas);

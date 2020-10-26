@@ -45,15 +45,6 @@ public class World {
 
     //ivett
     public void update(float deltaTime) {
-        boolean atLeast = false;
-        for (int i = 0; i < mapa.length; i++) {
-            for (int j = 0; j < mapa[0].length; j++)
-                if (mapa[i][j] != 0 || mapa2[i][j] != 0) {
-                    atLeast = true;
-                    break;
-                }
-
-        }
         if (gameOver) return;
         if (currentAnimal.getIsMoving() != 0) {
             if (currentAnimal.keepMoving()) {
@@ -61,7 +52,6 @@ public class World {
                 next();
             }
         } else {
-
             if (muere(currentAnimal)) {
                 buffervivos[currentAnimal.getRefer()]--;
                 buffermuertos[currentAnimal.getRefer()]++;
@@ -71,11 +61,14 @@ public class World {
             if (reproduccion(currentAnimal))
                 buffervivos[currentAnimal.getRefer()]++;
 
-            int r = alimentacion(currentAnimal);
-            if (r != 0) {
-                buffervivos[r]--;
-                buffermuertos[r]++;
+            Animal r = alimentacion(currentAnimal);
+            if (r.getRefer() != 0) {
+                buffervivos[r.getRefer()]--;
+                buffermuertos[r.getRefer()]++;
             }
+
+            //no realiza la animacion si no se puede mover
+            if (r.getX() == -1 && r.getY() == -1) currentAnimal.finishMove();
             if (growPlant())
                 buffervivos[2]++;
         }
@@ -124,10 +117,9 @@ public class World {
     }
 
     //lis
-    private void esAdyacente1(Animal a) {//es para facilitar el trabajo en el metodo alimentacion en una casilla
+    private boolean esAdyacente1(Animal a) {//es para facilitar el trabajo en el metodo alimentacion en una casilla
         if (a.getRefer() == 6) {
-            esAdyacente2(a);
-            return;
+            return esAdyacente2(a);
         }
         ArrayList<Pos> l = new ArrayList<>();
         for (int i = a.getX() - 1; i <= a.getX() + 1; i++) {//moverme por las filas del mapa
@@ -145,31 +137,37 @@ public class World {
             int n = r.nextInt(l.size());
             Pos p = l.get(n);
             actualizarMapa(p, a);
+            return true;
         }
+        return false;
     }
 
     //lis
-    private void esAdyacente2(Animal a) {  //es para facilitar el trabajo en el metodo alimentacion en una casilla
+    private boolean esAdyacente2(Animal a) {  //es para facilitar el trabajo en el metodo alimentacion en una casilla
         ArrayList<Pos> l = new ArrayList<>();
         for (int i = a.getX() - 2; i <= a.getX() + 2; i++) {//moverme por las filas del mapa
             for (int j = a.getY() - 2; j <= a.getY() + 2; j++) //moverme por las columnas
                 if (i >= 0 && i < mapa.length && j >= 0 && j < mapa[0].length) {
-                    if (mapa[i][j] == 0 && mapa2[i][j] == 0 && mapa2[i][j] == 1) {//para encontrar un espacio vacio
+                    if (mapa[i][j] == 0 && mapa2[i][j] == 0 || mapa2[i][j] == 1) {//para encontrar un espacio vacio
                         l.add(new Pos(i, j, 0));
                     }
                 }
         }
 
         if (!l.isEmpty()) {
+            System.out.println("no empty");
             Random r = new Random();
             int n = r.nextInt(l.size());
             Pos p = l.get(n);
             actualizarMapa(p, a);
+            return true;
         }
+        return false;
     }
 
     //lis
     private boolean muere(Animal a) {
+        System.out.println(a.getX() + " animal " + a.getY());
         boolean isDead = false;
         switch (a.getRefer()) {
             case 3://conejo pasa 2 turnos sin comer
@@ -182,11 +180,14 @@ public class World {
                 break;
             case 5:
             case 6:
-                if (a.contar() == 4)
+
+                if (a.contar() == 4) {
                     isDead = true;
+                }
                 break;
         }
         if (isDead) {
+            System.out.println("muere");
             mapa2[a.getX()][a.getY()] = 7;
             mapa[a.getX()][a.getY()] = 0;
             vivos.remove(a);
@@ -250,7 +251,7 @@ public class World {
     }
 
     //ivett
-    private int alimentacion(Animal a) {
+    private Animal alimentacion(Animal a) {
         ArrayList<Pos> alimento = new ArrayList<>();
         for (int i = a.getX() - 1; i <= a.getX() + 1; i++) {//moverme por las filas del mapa
             for (int j = a.getY() - 1; j <= a.getY() + 1; j++) {
@@ -311,10 +312,13 @@ public class World {
             }
             actualizarMapa(po, a);
             a.seAlimento();
-        } else
-            esAdyacente1(a);
-
-        return animal.getRefer();
+        } else {
+            if (!esAdyacente1(a)) {
+                animal.setX(-1);
+                animal.setY(-1);
+            }
+        }
+        return animal;
 
     }
 

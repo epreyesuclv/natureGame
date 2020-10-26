@@ -5,12 +5,14 @@ package natureGame.framework.screen;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import natureGame.MyGame;
+import natureGame.framework.audio.Music;
 import natureGame.framework.fileIO.Assets;
 import natureGame.framework.fileIO.Settings;
 import natureGame.framework.graphics.Graphics;
@@ -32,7 +34,7 @@ public class GameScreen extends Screen {
     private Statistics statDeath;
     private float updateTick = 0;
     private int[] cant = new int[10];
-
+    private Music music;
 
     enum GameState {
         Running,
@@ -48,9 +50,10 @@ public class GameScreen extends Screen {
         myGame = game;
         world = new World();
         state = GameState.Running;
-
+        music = myGame.getAudio().newMusic("atmosfera_1.mp3");
         game.changeSize(Settings.x * IMAGE_BOUNDS, Settings.y * IMAGE_BOUNDS);
         createMenu();
+        music.play();
 
     }
 
@@ -69,6 +72,8 @@ public class GameScreen extends Screen {
         statVivos = null;
         game.getGraphics().clear(0);
         myGame.showMenu();
+        music.stop();
+        music.dispose();
         Settings.initDUMMYList();
 
     }
@@ -186,6 +191,7 @@ public class GameScreen extends Screen {
 
     //se crea el menu de opciones de la parte superior derecha con sus eventos click asociados
     private void createMenu() {
+
         MenuItem pause = new MenuItem("pause");
         pause.setOnAction(event -> {
             if (state == GameState.Running) {
@@ -200,6 +206,25 @@ public class GameScreen extends Screen {
         exit.setOnAction(e -> {
             state = GameState.GameOver;
         });
+
+        Canvas canvas = new Canvas(30, 30);
+        canvas.getGraphicsContext2D().drawImage(Assets.music_on.getImage(), 0, 0);
+        MenuItem musicPlay = new MenuItem("play");
+        musicPlay.setGraphic(canvas);
+        musicPlay.setOnAction(event -> {
+            if (!music.isPlaying())
+                music.play();
+        });
+        Canvas canvas2 = new Canvas(30, 30);
+        canvas2.getGraphicsContext2D().drawImage(Assets.music_off.getImage(), 0, 0);
+        MenuItem musicPause = new MenuItem("pause");
+        musicPause.setGraphic(canvas2);
+        musicPause.setOnAction(e -> {
+            if (music.isPlaying())
+                music.pause();
+        });
+
+
         MenuItem checkVivios = new MenuItem("Vivos");
         checkVivios.setOnAction(e -> {
             if (statVivos == null) {
@@ -235,9 +260,10 @@ public class GameScreen extends Screen {
             if (!statDeath.stage.isShowing())
                 statDeath.stage.show();
         });
-        Menu statistics = new Menu("statistics", null, checkMuertos, checkTotal, checkVivios);
-        Menu menu = new Menu("game", null, pause, exit);
-        getRoot().getChildren().add(new MenuBar(menu, statistics));
+        Menu statistics = new Menu("Estadisticas", null, checkMuertos, checkTotal, checkVivios);
+        Menu menu = new Menu("Juego", null, pause, exit);
+        Menu music = new Menu("Sonido", null, musicPlay, musicPause);
+        getRoot().getChildren().add(new MenuBar(menu, statistics, music));
 
 
     }

@@ -68,6 +68,10 @@ public class Animal extends Pos {
         return keepMoving();
     }
 
+    public void finishMove() {
+        isMoving = 6;
+    }
+
     //se usa para cambiar el estado de movimiento cuando el animal se esta moviendo
     public boolean keepMoving() {
         if (isMoving++ < 6) {

@@ -10,6 +10,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import natureGame.MyGame;
+import natureGame.framework.audio.Music;
 import natureGame.framework.fileIO.Assets;
 import natureGame.framework.fileIO.Settings;
 
@@ -18,13 +19,19 @@ import java.io.IOException;
 public class Menu extends AnchorPane {
     private MyGame myGame;
 
+    private Music music;
+
     public Menu(MyGame myGame) {
         super();
         this.myGame = myGame;
+        music = myGame.getAudio().newMusic("aves_16.mp3");
         init();
+
     }
 
     private void init() {
+        music.play();
+        music.setLooping(true);
         //menu de opciones para cambiarle el tamanho a las casillas de los animales en la simulanion
         MenuItem zoomScreen = new MenuItem("Zoom");
         zoomScreen.setOnAction(e -> myGame.changeScreen(0));
@@ -64,6 +71,8 @@ public class Menu extends AnchorPane {
         out.setTranslateX(1050);
         getChildren().add(out);
         out.setOnMouseClicked((MouseEvent event) -> {
+            music.stop();
+            music.dispose();
             MyGame.getPrimaryStage().close();
             System.exit(0);
         });
@@ -85,14 +94,17 @@ public class Menu extends AnchorPane {
         play.getGraphicsContext2D().drawImage(Assets.gamepad.getImage(), 0, 0);
         play.setTranslateX(20);
         play.setTranslateY(550);
-        play.setOnMouseClicked(event -> {
-            myGame.load();
-            myGame.startRendering();
-        });
+        play.setOnMouseClicked(event -> handle(event));
         getChildren().add(play);
         myGame.initDragg(this);
         getChildren().add(new MenuBar(screen, fps));
 
     }
 
+    private void handle(MouseEvent event) {
+        music.stop();
+        music.dispose();
+        myGame.load();
+        myGame.startRendering();
+    }
 }

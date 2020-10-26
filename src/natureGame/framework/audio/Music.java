@@ -16,7 +16,7 @@ public interface Music {
 
     public boolean isLooping();
 
-    public void setVollume();
+    public void setVollume(double value);
 
-    public void setLooping();
+    public void setLooping(boolean value);
 }
