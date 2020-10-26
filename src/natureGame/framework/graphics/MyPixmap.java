@@ -1,6 +1,6 @@
 package natureGame.framework.graphics;
 /**
- * clase q gestiona las propiedades de una imagen,se hizo por conveniencia
+ * clase q gestiona las propiedades de una imagen utilizadas en la aplicacion
  */
 
 import javafx.scene.image.Image;

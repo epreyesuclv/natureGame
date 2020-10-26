@@ -1,4 +1,4 @@
-package natureGame.framework.scene.MapaScene;
+package natureGame.framework.graphics;
 /**
  * es el root de la simulacion, es para q la simulacion se le pueda hacer scroll
  */

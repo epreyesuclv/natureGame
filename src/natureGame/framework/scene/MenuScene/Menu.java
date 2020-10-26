@@ -16,51 +16,43 @@ import natureGame.framework.fileIO.Settings;
 import java.io.IOException;
 
 public class Menu extends AnchorPane {
-    MyGame myGame;
-    Canvas canvas;
+    private MyGame myGame;
 
-    public Menu(MyGame myGame, Canvas canvas) {
+    public Menu(MyGame myGame) {
         super();
         this.myGame = myGame;
-        this.canvas = canvas;
         init();
     }
 
     private void init() {
         //menu de opciones para cambiarle el tamanho a las casillas de los animales en la simulanion
         MenuItem zoomScreen = new MenuItem("Zoom");
-        zoomScreen.setOnAction(e -> {
-            myGame.changeScreen(0);
-        });
+        zoomScreen.setOnAction(e -> myGame.changeScreen(0));
         MenuItem normalScreen = new MenuItem("Normal");
-        normalScreen.setOnAction(e -> {
-            myGame.changeScreen(1);
-        });
+        normalScreen.setOnAction(e ->
+                myGame.changeScreen(1));
 
         MenuItem miniScreen = new MenuItem("Mini");
-        miniScreen.setOnAction(e -> {
-            myGame.changeScreen(2);
-        });
+        miniScreen.setOnAction(e ->
+                myGame.changeScreen(2));
 
-
+        //para q e usuario controle la velocidad e la simulacion
         MenuItem fast = new MenuItem("Fast");
-        fast.setOnAction(e -> {
-            Settings.setfast();
-        });
+        fast.setOnAction(e ->
+                Settings.setfast());
         MenuItem normalSpeed = new MenuItem("Normal");
-        normalSpeed.setOnAction(e -> {
-            Settings.setNormalSpeed();
-        });
+        normalSpeed.setOnAction(e ->
+                Settings.setNormalSpeed());
 
         MenuItem slow = new MenuItem("slow");
-        slow.setOnAction(e -> {
-            Settings.setSlow();
-        });
+        slow.setOnAction(e ->
+                Settings.setSlow());
 
 
         javafx.scene.control.Menu screen = new javafx.scene.control.Menu("Pantalla", null, zoomScreen, normalScreen, miniScreen);
         javafx.scene.control.Menu fps = new javafx.scene.control.Menu("FPS", null, fast, normalSpeed, slow);
-//los demas botones y sus eventos click asosiados
+
+        //los demas botones y sus eventos click asosiados
         setWidth(1200);
         setHeight(720);
         Canvas fondo = new Canvas(1200, 720);

@@ -1,7 +1,7 @@
 package natureGame.framework.scene.ConfigurationScene;
 /**
  * Es la clase controladora del fxml configuration.fxml,
- * se encargade gestionar los errores en los campos y de guardar las confuguraciones q el usuario defina
+ * se encarga de gestionar los errores en los campos y de guardar las configuraciones q el usuario defina
  */
 
 import javafx.fxml.FXML;
@@ -82,8 +82,12 @@ public class ConfigurationController {
         }
 
 
-        if (cantidades[7] < 30 || cantidades[8] < 30) {
-            showError("La cantidad de casillas debe ser minimo 30x30");
+        if (cantidades[7] < 40 || cantidades[8] < 40) {
+            showError("La cantidad de casillas debe ser minimo 40x40");
+            return false;
+        }
+        if (cantidades[7] >= 200 || cantidades[8] >= 200) {
+            showError("La cantidad de casillas debe ser maximo 200x200");
             return false;
         }
         save(cantidades);

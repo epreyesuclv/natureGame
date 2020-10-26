@@ -7,7 +7,7 @@ import natureGame.framework.game.Game;
 
 /**
  * implementa la interface Graphics
- * es una herramienta para el trabajo con los graficos de la aplicacio
+ * es una herramienta para el trabajo con los graficos de la aplicacion
  */
 public class MyGraphics implements Graphics {
     Image image;

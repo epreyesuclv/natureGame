@@ -14,7 +14,7 @@ public class World {
     public int[] bufferTotal;
     public Animal currentAnimal;
     private List<Animal> inmovilList;
-    private boolean gameOver = false;
+    public boolean gameOver = false;
     public int[][] mapa;
     public int[][] mapa2;
     private int nextIndex;
@@ -45,6 +45,15 @@ public class World {
 
     //ivett
     public void update(float deltaTime) {
+        boolean atLeast = false;
+        for (int i = 0; i < mapa.length; i++) {
+            for (int j = 0; j < mapa[0].length; j++)
+                if (mapa[i][j] != 0 || mapa2[i][j] != 0) {
+                    atLeast = true;
+                    break;
+                }
+
+        }
         if (gameOver) return;
         if (currentAnimal.getIsMoving() != 0) {
             if (currentAnimal.keepMoving()) {

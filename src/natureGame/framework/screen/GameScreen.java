@@ -82,7 +82,7 @@ public class GameScreen extends Screen {
     private void updateRunnig(float deltaTime) {
         world.update(deltaTime);
         updateTick += deltaTime;
-
+        if (world.gameOver) state = GameState.GameOver;
         if (updateTick > 0.5f) {
             updateTick -= 0.5f;
             if (statVivos != null) {

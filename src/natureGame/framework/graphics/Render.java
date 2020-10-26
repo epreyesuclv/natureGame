@@ -7,8 +7,8 @@ import natureGame.framework.fileIO.Settings;
 
 /**
  * es la clase q gestiona la simulacion,tanto los graficos como la logica mediate la creacion de un hilo en segundo plano
- * q se encarga de llamar los metodos update() y present() de la clase <E extends Screen> que este en este momento,
- * que actualiza la parte logica y la parte visual respectivamente.
+ * q se encarga de llamar los metodos update() y present() de la clase GameScreen,la cual es la encargada de
+ * actualizar la parte logica y la parte visual respectivamente.
  */
 public class Render {
     MyGame game;
@@ -25,8 +25,8 @@ public class Render {
         this.buffer = buffer;
         anchor = new MyRoot(1200, 720);
         anchor.getChildren().add(buffer);
-        //para crear el hilo en seggundo plano se utilizo la clase de java Animationtimer
 
+        //para crear el hilo en seggundo plano se utilizo la clase de java AnimationTimer
         renderThread = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -70,10 +70,6 @@ public class Render {
         anchor.changeSize(x, y);
         buffer.setWidth(x);
         buffer.setHeight(y);
-    }
-
-    public void changeSize(double width, double height) {
-        changeSize((int) width, (int) height);
     }
 
     public void stop() {

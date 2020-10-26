@@ -11,8 +11,8 @@ import java.util.Random;
  */
 
 public class Settings {
-    private static final int NORMAL_BOUNDS = 60;
-    private static final int ZOOM_BOUNDS = 90;
+    private static final int NORMAL_BOUNDS = 54;
+    private static final int ZOOM_BOUNDS = 72;
     private static final int SLOW = 15;
     private static final int FAST = 60;
     private static final int NORMAL_SPEED = 30;

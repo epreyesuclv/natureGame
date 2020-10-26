@@ -14,12 +14,8 @@ import natureGame.framework.fileIO.FileIO;
 import natureGame.framework.fileIO.MyFileIO;
 import natureGame.framework.fileIO.Settings;
 import natureGame.framework.game.Game;
-import natureGame.framework.graphics.Graphics;
-import natureGame.framework.graphics.MyGraphics;
-import natureGame.framework.graphics.MyRoot;
-import natureGame.framework.graphics.Render;
+import natureGame.framework.graphics.*;
 import natureGame.framework.scene.ConfigurationScene.ConfigurationController;
-import natureGame.framework.scene.MapaScene.MyScroll;
 import natureGame.framework.scene.MenuScene.Menu;
 import natureGame.framework.screen.GameScreen;
 import natureGame.framework.screen.LoadingScreen;
@@ -128,7 +124,7 @@ public class MyGame extends Application implements Game {
     //muestra la pantalla de menu
     public void showMenu() {
         stopRender();
-        Menu m = new Menu(this, canvas);
+        Menu m = new Menu(this);
         menu = new Scene(m);
         primaryStage.setScene(menu);
     }
