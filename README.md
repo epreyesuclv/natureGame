@@ -13,7 +13,7 @@ a nature simulator with some few animals
  Snake
 
  Owl
- 
+
  Vulture
 
  
@@ -51,4 +51,6 @@ graphic statistics, so enjoy it
 
 # contact 
 laritzam.p.g@gmail.com or lpgonzalez@uclv.cu
+
+
 epreyesuclv@gmail.com or epreyes@uclv.cu
