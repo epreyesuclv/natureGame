@@ -127,7 +127,7 @@ public class GameScreen extends Screen {
         for (int i = 0; i < Settings.x; i++)
             for (int j = 0; j < Settings.y; j++) {
                 g.drawPixmap(Assets.terreno, i * IMAGE_BOUNDS, j * IMAGE_BOUNDS);
-                switch (world.mapa2[i][j]) {
+                switch (world.getmapa2(i,j)) {
                     case 1:
                         g.drawPixmap(Assets.piedra, i * IMAGE_BOUNDS, j * IMAGE_BOUNDS);
                         break;
@@ -137,7 +137,7 @@ public class GameScreen extends Screen {
                     case 7:
                         g.drawPixmap(Assets.huesos, i * IMAGE_BOUNDS, j * IMAGE_BOUNDS);
                 }
-                switch (world.mapa[i][j]) {
+                switch (world.getmapa1(i,j)) {
                     case 3:
                         g.drawPixmap(Assets.conejo, i * IMAGE_BOUNDS, j * IMAGE_BOUNDS);
                         break;
