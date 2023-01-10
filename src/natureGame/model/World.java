@@ -2,6 +2,7 @@ package natureGame.model;
 
 import natureGame.framework.fileIO.Settings;
 import natureGame.prolog.PrologQuery;
+import org.jpl7.fli.Prolog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +11,10 @@ import java.util.Random;
 //lis y ivett
 public class World {
     private List<Animal> vivos;
-    public int[] buffervivos;
+    //public int[] buffervivos;
     public int[] buffermuertos;
     public int[] bufferTotal;
+
     public Animal currentAnimal;
     private List<Animal> inmovilList;
     public boolean gameOver = false;
@@ -22,29 +24,52 @@ public class World {
     private final String MAP_1 = "mapa1";
     private final String MAP_2 = "mapa2";
     private int growCounter = 0;
+    private PrologQuery query = PrologQuery.getInstance();
 
     public int getmapa1(int x, int y) {
-        return PrologQuery.getElementMapa(x, y, MAP_1);
+        return query.getElementMapa(x, y, MAP_1);
     }
 
     private void setmapa1(int x, int y, int r) {
-        PrologQuery.eliminateElementMapa(x, y, MAP_1);
-        PrologQuery.addElementMapa(x, y, r, MAP_1);
+        query.eliminateElementMapa(x, y, MAP_1);
+        query.addElementMapa(x, y, r, MAP_1);
     }
 
     public int getmapa2(int x, int y) {
-        return PrologQuery.getElementMapa(x, y, MAP_2);
+        return query.getElementMapa(x, y, MAP_2);
     }
 
     private void setmapa2(int x, int y, int r) {
-        PrologQuery.eliminateElementMapa(x, y, MAP_2);
-        PrologQuery.addElementMapa(x, y, r, MAP_2);
+        query.eliminateElementMapa(x, y, MAP_2);
+        query.addElementMapa(x, y, r, MAP_2);
     }
 
-    //ivett
+    public int getAllLivings() {
+        return query.getAmountLivings();
+    }
+
+    public int getAllDeath() {
+        return query.getAmountDeath();
+    }
+
+    public int getAllByRefer(int x) {
+        return query.getAmountByRefer(x);
+    }
+
+    public int[] getBufferVivos() {
+        return
+                new int[]{0, 0,
+                        getAllByRefer(2),
+                        getAllByRefer(3),
+                        getAllByRefer(4),
+                        getAllByRefer(5),
+                        getAllByRefer(6)}
+                ;
+    }
+
     public World() {
         vivos = Settings.list;
-        buffervivos = new int[10];
+        //  buffervivos = new int[10];
         buffermuertos = new int[10];
         bufferTotal = new int[10];
         //mapa = new int[Settings.x][Settings.y];
@@ -53,19 +78,20 @@ public class World {
         inmovilList = Settings.inmoviles;
         currentAnimal = vivos.get(vivos.size() - 1);
         nextIndex = vivos.size() - 1;
-        for (int i = 0; i < vivos.size(); i++) {
+        /*for (int i = 0; i < vivos.size(); i++) {
             buffervivos[vivos.get(i).getRefer()]++;
 
         }
         for (int i = 0; i < inmovilList.size(); i++) {
             buffervivos[inmovilList.get(i).getRefer()]++;
-        }
+        }*/
         updateMapa();
         inmovilList = null;
     }
 
     //ivett
     public void update(float deltaTime) {
+
         if (gameOver) return;
         if (currentAnimal.getIsMoving() != 0) {
             if (currentAnimal.keepMoving()) {
@@ -75,24 +101,24 @@ public class World {
             }
         } else {
             if (muere(currentAnimal)) {
-                buffervivos[currentAnimal.getRefer()]--;
+                //buffervivos[currentAnimal.getRefer()]--;
                 buffermuertos[currentAnimal.getRefer()]++;
+
                 next();
                 return;
             }
             if (reproduccion(currentAnimal))
-                buffervivos[currentAnimal.getRefer()]++;
+                ; // buffervivos[currentAnimal.getRefer()]++;
 
             Animal r = alimentacion(currentAnimal);
+            if (r == null) currentAnimal.finishMove();
             if (r.getRefer() != 0) {
-                buffervivos[r.getRefer()]--;
+                // buffervivos[r.getRefer()]--;
                 buffermuertos[r.getRefer()]++;
             }
 
-            //no realiza la animacion si no se puede mover
-            if (r.getX() == -1 && r.getY() == -1) currentAnimal.finishMove();
             if (growPlant())
-                buffervivos[2]++;
+                ; //  buffervivos[2]++;
         }
     }
 
@@ -112,7 +138,7 @@ public class World {
         Random rand = new Random();
         int index = rand.nextInt(list.size());
         Pos pos = list.get(index);
-        setmapa2(pos.getX(),pos.getY(),2);
+        setmapa2(pos.getX(), pos.getY(), 2);
         //mapa2[pos.getX()][pos.getY()] = 2;
         growCounter = 0;
         return true;

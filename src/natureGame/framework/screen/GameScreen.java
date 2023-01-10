@@ -91,7 +91,7 @@ public class GameScreen extends Screen {
         if (updateTick > 0.5f) {
             updateTick -= 0.5f;
             if (statVivos != null) {
-                statVivos.updateElement(world.buffervivos);
+                statVivos.updateElement(world.getBufferVivos());
 
             }
             if (statDeath != null) {
@@ -99,7 +99,7 @@ public class GameScreen extends Screen {
             }
             if (statTotal != null) {
                 for (int i = 0; i < 7; i++)
-                    world.bufferTotal[i] = world.buffervivos[i] + world.buffermuertos[i];
+                    world.bufferTotal[i] = world.getBufferVivos()[i] + world.buffermuertos[i];
 
                 statTotal.updateElement(world.bufferTotal);
             }
