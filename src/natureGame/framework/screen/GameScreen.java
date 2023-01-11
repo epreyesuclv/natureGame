@@ -95,11 +95,11 @@ public class GameScreen extends Screen {
 
             }
             if (statDeath != null) {
-                statDeath.updateElement(world.buffermuertos);
+                statDeath.updateElement(world.getAllDeath());
             }
             if (statTotal != null) {
                 for (int i = 0; i < 7; i++)
-                    world.bufferTotal[i] = world.getBufferVivos()[i] + world.buffermuertos[i];
+                    world.bufferTotal[i] = world.getBufferVivos()[i] + world.getAllDeath()[i];
 
                 statTotal.updateElement(world.bufferTotal);
             }

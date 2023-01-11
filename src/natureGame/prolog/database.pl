@@ -10,3 +10,4 @@ getAllDeath(I) :- findall(X,(mapa2(_,_,X),X=7),L1),
 
 getAllByRefer(R,I) :- findall(X,(mapa1(_,_,X),X=R),L1),length(L1, I).
 getAllPlants(I) :- findall(X,(mapa2(_,_,X),X=2),L1),length(L1, I).
+getAllDeathByRefer(R,I) :- findall(X,(X=R,death(X)),L),length(L,I).

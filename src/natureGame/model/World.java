@@ -12,7 +12,7 @@ import java.util.Random;
 public class World {
     private List<Animal> vivos;
     //public int[] buffervivos;
-    public int[] buffermuertos;
+    //public int[] buffermuertos;
     public int[] bufferTotal;
 
     public Animal currentAnimal;
@@ -48,8 +48,12 @@ public class World {
         return query.getAmountLivings();
     }
 
-    public int getAllDeath() {
-        return query.getAmountDeath();
+    public int[] getAllDeath() {
+        return new int[]{0, 0, query.getAllDeathByRefer(2),
+                query.getAllDeathByRefer(3),
+                query.getAllDeathByRefer(4),
+                query.getAllDeathByRefer(5),
+                query.getAllDeathByRefer(6)};
     }
 
     public int getAllByRefer(int x) {
@@ -70,7 +74,7 @@ public class World {
     public World() {
         vivos = Settings.list;
         //  buffervivos = new int[10];
-        buffermuertos = new int[10];
+        //buffermuertos = new int[10];
         bufferTotal = new int[10];
         //mapa = new int[Settings.x][Settings.y];
         //mapa2 = new int[Settings.x][Settings.y];
@@ -102,8 +106,8 @@ public class World {
         } else {
             if (muere(currentAnimal)) {
                 //buffervivos[currentAnimal.getRefer()]--;
-                buffermuertos[currentAnimal.getRefer()]++;
-
+                //buffermuertos[currentAnimal.getRefer()]++;
+                query.addDeath(currentAnimal.getRefer());
                 next();
                 return;
             }
@@ -114,7 +118,8 @@ public class World {
             if (r == null) currentAnimal.finishMove();
             if (r.getRefer() != 0) {
                 // buffervivos[r.getRefer()]--;
-                buffermuertos[r.getRefer()]++;
+                //buffermuertos[r.getRefer()]++;
+                query.addDeath(r.getRefer());
             }
 
             if (growPlant())

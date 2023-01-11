@@ -3,8 +3,6 @@ package natureGame.prolog;
 import org.jpl7.Query;
 import org.jpl7.Term;
 
-import java.time.LocalTime;
-import java.util.Date;
 import java.util.Map;
 
 public class PrologQuery {
@@ -28,6 +26,7 @@ public class PrologQuery {
     public int getElementMapa(int x, int y, String mapa) {
         Map<String, Term> m = execute(mapa + "(" + x + "," + y + ",P).");
         if (m == null) {
+            addElementMapa(x, y, 0, mapa);
             return 0;
         }
         int result = Integer.parseInt(m.get("P").toString());
@@ -35,12 +34,11 @@ public class PrologQuery {
     }
 
     public void addElementMapa(int x, int y, int refer, String mapa) {
-
-        execute("assert(" + mapa + "(" + x + "," + y + "," + refer + ")).");
+        execute("assertz(" + mapa + "(" + x + "," + y + "," + refer + ")).");
     }
 
     public void eliminateElementMapa(int x, int y, String mapa) {
-        execute("retract(" + mapa + "(" + x + "," + y + ",_)).");
+        execute("retractall(" + mapa + "(" + x + "," + y + ",_)).");
     }
 
     public int getAmountLivings() {
@@ -58,7 +56,7 @@ public class PrologQuery {
         Map<String, Term> m = q.getSolution();
         q.close();
         long currentTime = System.nanoTime() - time;
-        System.out.println("executing query: " + build + " with time : " + currentTime);
+        System.out.println("[PrologQuery] executing query: " + build + " result : " + (m == null ? "null" : m.toString()) + " with time : " + currentTime);
         return m;
     }
 
@@ -82,8 +80,22 @@ public class PrologQuery {
         return result;
     }
 
+    public void addDeath(int r) {
+        String build = "assert(death(" + r + ")).";
+        execute(build);
+    }
+
+    public int getAllDeathByRefer(int r) {
+        String build = "getAllDeathByRefer(" + r + ",I).";
+        Map<String, Term> m = execute(build);
+        if (m == null) return 0;
+        int result = Integer.parseInt(m.get("I").toString());
+        return result;
+    }
+
     void deleteMapa() {
         execute("retractall(mapa1(_,_,_)).");
         execute("retractall(mapa2(_,_,_)).");
     }
+
 }
