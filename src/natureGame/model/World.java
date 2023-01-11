@@ -1,6 +1,8 @@
 package natureGame.model;
 
 import natureGame.framework.fileIO.Settings;
+import natureGame.prolog.PrologQuery;
+import org.jpl7.fli.Prolog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,68 +11,119 @@ import java.util.Random;
 //lis y ivett
 public class World {
     private List<Animal> vivos;
-    public int[] buffervivos;
-    public int[] buffermuertos;
+    //public int[] buffervivos;
+    //public int[] buffermuertos;
     public int[] bufferTotal;
+
     public Animal currentAnimal;
     private List<Animal> inmovilList;
     public boolean gameOver = false;
-    public int[][] mapa;
-    public int[][] mapa2;
+    //private int[][] mapa;
+    //public int[][] mapa2;
     private int nextIndex;
+    private final String MAP_1 = "mapa1";
+    private final String MAP_2 = "mapa2";
     private int growCounter = 0;
+    private PrologQuery query = PrologQuery.getInstance();
 
-    //ivett
+    public int getmapa1(int x, int y) {
+        return query.getElementMapa(x, y, MAP_1);
+    }
+
+    private void setmapa1(int x, int y, int r) {
+        query.eliminateElementMapa(x, y, MAP_1);
+        query.addElementMapa(x, y, r, MAP_1);
+    }
+
+    public int getmapa2(int x, int y) {
+        return query.getElementMapa(x, y, MAP_2);
+    }
+
+    private void setmapa2(int x, int y, int r) {
+        query.eliminateElementMapa(x, y, MAP_2);
+        query.addElementMapa(x, y, r, MAP_2);
+    }
+
+    public int getAllLivings() {
+        return query.getAmountLivings();
+    }
+
+    public int[] getAllDeath() {
+        return new int[]{0, 0, query.getAllDeathByRefer(2),
+                query.getAllDeathByRefer(3),
+                query.getAllDeathByRefer(4),
+                query.getAllDeathByRefer(5),
+                query.getAllDeathByRefer(6)};
+    }
+
+    public int getAllByRefer(int x) {
+        return query.getAmountByRefer(x);
+    }
+
+    public int[] getBufferVivos() {
+        return
+                new int[]{0, 0,
+                        getAllByRefer(2),
+                        getAllByRefer(3),
+                        getAllByRefer(4),
+                        getAllByRefer(5),
+                        getAllByRefer(6)}
+                ;
+    }
+
     public World() {
         vivos = Settings.list;
-        buffervivos = new int[10];
-        buffermuertos = new int[10];
+        //  buffervivos = new int[10];
+        //buffermuertos = new int[10];
         bufferTotal = new int[10];
-        mapa = new int[Settings.x][Settings.y];
-        mapa2 = new int[Settings.x][Settings.y];
+        //mapa = new int[Settings.x][Settings.y];
+        //mapa2 = new int[Settings.x][Settings.y];
 
         inmovilList = Settings.inmoviles;
         currentAnimal = vivos.get(vivos.size() - 1);
         nextIndex = vivos.size() - 1;
-        for (int i = 0; i < vivos.size(); i++) {
+        /*for (int i = 0; i < vivos.size(); i++) {
             buffervivos[vivos.get(i).getRefer()]++;
 
         }
         for (int i = 0; i < inmovilList.size(); i++) {
             buffervivos[inmovilList.get(i).getRefer()]++;
-        }
+        }*/
         updateMapa();
         inmovilList = null;
     }
 
     //ivett
     public void update(float deltaTime) {
+
         if (gameOver) return;
         if (currentAnimal.getIsMoving() != 0) {
             if (currentAnimal.keepMoving()) {
-                mapa[currentAnimal.getX()][currentAnimal.getY()] = currentAnimal.getRefer();
+                // mapa[currentAnimal.getX()][currentAnimal.getY()] = currentAnimal.getRefer();
+                setmapa1(currentAnimal.getX(), currentAnimal.getY(), currentAnimal.getRefer());
                 next();
             }
         } else {
             if (muere(currentAnimal)) {
-                buffervivos[currentAnimal.getRefer()]--;
-                buffermuertos[currentAnimal.getRefer()]++;
+                //buffervivos[currentAnimal.getRefer()]--;
+                //buffermuertos[currentAnimal.getRefer()]++;
+                query.addDeath(currentAnimal.getRefer());
                 next();
                 return;
             }
             if (reproduccion(currentAnimal))
-                buffervivos[currentAnimal.getRefer()]++;
+                ; // buffervivos[currentAnimal.getRefer()]++;
 
             Animal r = alimentacion(currentAnimal);
+            if (r == null) currentAnimal.finishMove();
             if (r.getRefer() != 0) {
-                buffervivos[r.getRefer()]--;
-                buffermuertos[r.getRefer()]++;
+                // buffervivos[r.getRefer()]--;
+                //buffermuertos[r.getRefer()]++;
+                query.addDeath(r.getRefer());
             }
 
-            //no realiza la animacion si no se puede mover
-            if (r.getX() == -1 && r.getY() == -1) currentAnimal.finishMove();
             if (growPlant())
-                buffervivos[2]++;
+                ; //  buffervivos[2]++;
         }
     }
 
@@ -80,7 +133,8 @@ public class World {
         List<Pos> list = new ArrayList<>();
         for (int i = 0; i < Settings.x; i++)
             for (int j = 0; j < Settings.y; j++) {
-                if (mapa[i][j] == 0 && mapa2[i][j] == 0) list.add(new Pos(i, j, 0));
+                if (/*mapa[i][j] == 0*/getmapa1(i, j) == 0 && /*mapa2[i][j] == 0*/ getmapa2(i, j) == 0)
+                    list.add(new Pos(i, j, 0));
             }
         if (list.isEmpty()) {
             gameOver = true;
@@ -89,7 +143,8 @@ public class World {
         Random rand = new Random();
         int index = rand.nextInt(list.size());
         Pos pos = list.get(index);
-        mapa2[pos.getX()][pos.getY()] = 2;
+        setmapa2(pos.getX(), pos.getY(), 2);
+        //mapa2[pos.getX()][pos.getY()] = 2;
         growCounter = 0;
         return true;
     }
@@ -97,10 +152,13 @@ public class World {
     //ivett
     private void updateMapa() {
         for (Animal a : vivos) {
-            mapa[a.getX()][a.getY()] = a.getRefer();
+            setmapa1(a.getX(), a.getY(), a.getRefer());
+            //mapa[a.getX()][a.getY()] = a.getRefer();
         }
         for (Animal i : inmovilList) {
-            mapa2[i.getX()][i.getY()] = i.getRefer();
+
+            //mapa2[i.getX()][i.getY()] = i.getRefer();
+            setmapa2(i.getX(), i.getY(), i.getRefer());
         }
     }
 
@@ -124,10 +182,10 @@ public class World {
         ArrayList<Pos> l = new ArrayList<>();
         for (int i = a.getX() - 1; i <= a.getX() + 1; i++) {//moverme por las filas del mapa
             for (int j = a.getY() - 1; j <= a.getY() + 1; j++) //moverme por las columnas
-                if (i >= 0 && i < mapa.length && j >= 0 && j < mapa[0].length) {
-                    if (mapa[i][j] == 0 && mapa2[i][j] == 0) {//para encontrar un espacio vacio
+                if (i >= 0 && i < Settings.x && j >= 0 && j < Settings.y) {
+                    if (/*mapa[i][j] == 0*/getmapa1(i, j) == 0 && /*mapa2[i][j] == 0*/getmapa2(i, j) == 0) {//para encontrar un espacio vacio
                         l.add(new Pos(i, j, 0));
-                    } else if (mapa2[i][j] == 1 && a.getRefer() == 5) {
+                    } else if (getmapa2(i, j) == 1/*mapa2[i][j] == 1*/ && a.getRefer() == 5) {
                         l.add(new Pos(i, j, 1));
                     }
                 }
@@ -147,8 +205,8 @@ public class World {
         ArrayList<Pos> l = new ArrayList<>();
         for (int i = a.getX() - 2; i <= a.getX() + 2; i++) {//moverme por las filas del mapa
             for (int j = a.getY() - 2; j <= a.getY() + 2; j++) //moverme por las columnas
-                if (i >= 0 && i < mapa.length && j >= 0 && j < mapa[0].length) {
-                    if (mapa[i][j] == 0 && mapa2[i][j] == 0 || mapa2[i][j] == 1) {//para encontrar un espacio vacio
+                if (i >= 0 && i < Settings.x && j >= 0 && j < Settings.y) {
+                    if (/*mapa[i][j] == 0*/ getmapa1(i, j) == 0 && /*mapa2[i][j] == 0 */ getmapa2(i, j) == 0 || getmapa2(i, j) == 1/*mapa2[i][j] == 1*/) {//para encontrar un espacio vacio
                         l.add(new Pos(i, j, 0));
                     }
                 }
@@ -188,8 +246,10 @@ public class World {
         }
         if (isDead) {
             System.out.println("muere");
-            mapa2[a.getX()][a.getY()] = 7;
-            mapa[a.getX()][a.getY()] = 0;
+            //mapa2[a.getX()][a.getY()] = 7;
+            setmapa2(a.getX(), a.getY(), 7);
+            // mapa[a.getX()][a.getY()] = 0;
+            setmapa1(a.getX(), a.getY(), 0);
             vivos.remove(a);
             return true;
         }
@@ -230,10 +290,10 @@ public class World {
         ArrayList<Pos> l = new ArrayList<>();
         for (int i = a.getX() - 1; i <= a.getX() + 1; i++) {//moverme por las filas del mapa
             for (int j = a.getY() - 1; j <= a.getY() + 1; j++)//moverme por las columnas
-                if (i >= 0 && i < mapa.length && j >= 0 && j < mapa[0].length) {
-                    if (mapa[i][j] == 0 && mapa2[i][j] == 0) {//para encontrar un espacio vacio
+                if (i >= 0 && i < Settings.x && j >= 0 && j < Settings.y) {
+                    if (/*mapa[i][j] == 0*/getmapa1(i, j) == 0 && /*mapa2[i][j] == 0*/getmapa2(i, j) == 0) {//para encontrar un espacio vacio
                         l.add(new Pos(i, j, 0));
-                    } else if (mapa2[i][j] == 1 && (a.getRefer() == 5 || a.getRefer() == 6)) {
+                    } else if (/*mapa2[i][j] == 1*/getmapa2(i, j) == 1 && (a.getRefer() == 5 || a.getRefer() == 6)) {
                         l.add(new Pos(i, j, 1));
                     }
                 }
@@ -242,7 +302,8 @@ public class World {
             Random r = new Random();
             int n = r.nextInt(l.size());
             Pos p = l.get(n);
-            mapa[p.getX()][p.getY()] = a.getRefer();
+            // mapa[p.getX()][p.getY()] = a.getRefer();
+            setmapa1(p.getX(), p.getY(), p.getRefer());
             vivos.add(new Animal(p.getX(), p.getY(), a.getRefer()));
             return true;
         }
@@ -255,22 +316,22 @@ public class World {
         ArrayList<Pos> alimento = new ArrayList<>();
         for (int i = a.getX() - 1; i <= a.getX() + 1; i++) {//moverme por las filas del mapa
             for (int j = a.getY() - 1; j <= a.getY() + 1; j++) {
-                if (i >= 0 && i < mapa.length && j >= 0 && j < mapa[0].length) {
+                if (i >= 0 && i < Settings.x && j >= 0 && j < Settings.y) {
                     switch (a.getRefer()) {
                         case 3:
-                            if (mapa2[i][j] == 2) {
+                            if (/*mapa2[i][j] == 2*/ getmapa2(i, j) == 2) {
                                 alimento.add(new Pos(i, j, 2));
                             }
                             break;
                         case 4:
-                            if (mapa[i][j] == 3) {
+                            if (/*mapa[i][j] == 3*/getmapa1(i, j) == 3) {
                                 alimento.add(new Pos(i, j, 3));
                             }
                             break;
                         case 5:
-                            if (mapa[i][j] == 4 || mapa[i][j] == 3) {
+                            if (getmapa1(i, j) == 4/*mapa[i][j] == 4*/ || /*mapa[i][j] == 3*/ getmapa1(i, j) == 3) {
 
-                                if (mapa[i][j] == 4)
+                                if (getmapa1(i, j) == 4/*mapa[i][j] == 4*/)
                                     alimento.add(new Pos(i, j, 4));
                                 else
                                     alimento.add(new Pos(i, j, 3));
@@ -285,8 +346,8 @@ public class World {
         if (a.getRefer() == 6)
             for (int i = a.getX() - 2; i <= a.getX() + 2; i++)
                 for (int j = a.getY() - 2; j <= a.getY() + 2; j++)
-                    if (i >= 0 && i < mapa.length && j >= 0 && j < mapa[0].length) {
-                        if (mapa2[i][j] == 7) {
+                    if (i >= 0 && i < Settings.x && j >= 0 && j < Settings.y) {
+                        if (getmapa2(i, j) == 7/*mapa2[i][j] == 7*/) {
                             alimento.add(new Pos(i, j, 7));
                         }
                     }
@@ -299,7 +360,9 @@ public class World {
             po = alimento.get(n);
 
             if (a.getRefer() == 3 || a.getRefer() == 6) {
-                mapa2[po.getX()][po.getY()] = 0;
+                //mapa2[po.getX()][po.getY()] = 0;
+                setmapa2(po.getX(), po.getY(), 0);
+                ;
                 if (po.getRefer() == 2) {
                     animal = new Animal(po.getX(), po.getY(), 2);
                 }
@@ -324,8 +387,12 @@ public class World {
 
     //ivett
     private void actualizarMapa(Pos p, Animal a) {
+        /*
         mapa[a.getX()][a.getY()] = 0;
         mapa[p.getX()][p.getY()] = 0;
+        */
+        setmapa1(a.getX(), a.getY(), 0);
+        setmapa1(p.getX(), p.getY(), 0);
         if (a.getRefer() == 6) a.moveTwice(p.getX(), p.getY());
         else a.move(p.getX(), p.getY());
     }

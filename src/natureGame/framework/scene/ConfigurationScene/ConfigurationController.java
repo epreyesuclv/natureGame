@@ -19,6 +19,7 @@ import natureGame.framework.fileIO.Settings;
 import natureGame.framework.scene.ConfigurationScene.Dialogs.ErrorDialog;
 import natureGame.model.Animal;
 import org.controlsfx.control.ToggleSwitch;
+import org.jpl7.Query;
 
 import java.io.IOException;
 import java.util.ArrayList;

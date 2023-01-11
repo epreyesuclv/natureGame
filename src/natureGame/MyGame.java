@@ -21,6 +21,7 @@ import natureGame.framework.scene.MenuScene.Menu;
 import natureGame.framework.screen.GameScreen;
 import natureGame.framework.screen.LoadingScreen;
 import natureGame.framework.screen.Screen;
+import natureGame.prolog.Test;
 
 import java.io.IOException;
 
@@ -63,6 +64,7 @@ public class MyGame extends Application implements Game {
     //hilo principal de javafx
     @Override
     public void start(Stage primaryStage) throws IOException {
+        if (!new Test().runTest()) return;
         this.primaryStage = primaryStage;
         primaryStage.setWidth(1200);
         primaryStage.setHeight(700);
@@ -100,7 +102,6 @@ public class MyGame extends Application implements Game {
     public void load() {
         screen = getStartScreen();
         screen.update(0);
-
         primaryStage.show();
     }
 
